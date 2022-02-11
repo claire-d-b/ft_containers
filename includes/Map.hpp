@@ -67,8 +67,9 @@ namespace ft
                 _p.setLast(end);
                 insert(first, last);
             }
-            map(const map& other) : _value_compare(other._value_compare), _key_compare(other._key_compare), _p(RBTree< Key, T, Compare, Allocator >(other._key_compare)), _n(other._n), _capacity(other._capacity), _alloc(other._alloc)
+            map(const map& other) : _value_compare(other._value_compare), _key_compare(other._key_compare), _p(RBTree< Key, T, Compare, Allocator >(other._key_compare)), _n(0), _capacity(0), _alloc(other._alloc)
             {
+                clear();
                 Leaf< Key, T > *end = new Leaf< Key, T >(key_type(), mapped_type());
                 _p.setLast(end);
                 insert(other.begin(), other.end());
@@ -79,10 +80,11 @@ namespace ft
             }
             map& operator=(const map& other)
             {
+                clear();
                 _value_compare = other._value_compare;
                 _key_compare = other._key_compare;
-                _n = other._n;
-                _capacity = other._capacity;
+                _n = 0;
+                _capacity = 0;
                 _alloc = other._alloc;
 
                 _p = RBTree< Key, T, Compare, Allocator >(_key_compare);
@@ -105,8 +107,6 @@ namespace ft
             }
             mapped_type& operator[](const Key& key)
             {
-                if (find(key) == end())
-					_n++;
                 return (*((insert(pair< Key, T >(key ,mapped_type()))).first)).second;
             }
             iterator begin()
@@ -161,7 +161,7 @@ namespace ft
             }
             size_type max_size() const
             {
-                return (std::pow(2, 32) / sizeof(T) * std::pow(2, 32) - 1);
+                return _alloc.max_size();
             }
             void clear()
             {
@@ -174,9 +174,9 @@ namespace ft
                 int exists = 1;
 				if ((it = iterator(_p.find(Leaf< Key, T >(value.first, value.second)))) == end())
                 {
-                    //std::cout << "insertion OK " << std::endl;
                     exists = 1;
 					_p.insert(Leaf< Key, T >(value.first, value.second));
+                    _n++;
                 }
 				return pair<iterator, bool>(iterator(_p.find(Leaf< Key, T >(value.first, value.second))), exists);
             }
@@ -185,7 +185,10 @@ namespace ft
                 (void)hint;
                 Leaf< Key, T > lf(value.first, value.second);
                 if (iterator(_p.find(lf)) == end())
+                {
+                    _n++;
                     _p.insert(lf);
+                }
                 return iterator(_p.find(lf));
             }
             template< class InputIt >
@@ -195,7 +198,10 @@ namespace ft
                 {
                     Leaf< Key, T > lf(first->first, first->second);
                     if (iterator(_p.find(lf)) == end())
+                    {
                         _p.insert(lf);
+                        _n++;
+                    }
                     first++;
                 }
             }
@@ -204,7 +210,10 @@ namespace ft
                 if (!_p.getRoot())
                     return ;
                 if (iterator(_p.find(*pos)) != end())
+                {
+                    _n--;
                     _p.deleteNode(pos->first);
+                }
             }
             void erase(iterator first, iterator last, typename ft::enable_if<!is_integral<iterator>::value>::type* = NULL)
             {
@@ -222,31 +231,40 @@ namespace ft
 					if (i != difference - 1)
 						it++;
                     if (iterator(_p.find(*tmp)) != end())
+                    {
                         _p.deleteNode(tmp->first);
+                        _n--;
+                    }
 					if (i != difference - 1)
 						it = iterator(_p.find(*it));
 				}
-				_n -= difference;
             }
             size_type erase(const Key& key)
             {
                 if (!_p.getRoot())
                     return 0;
+                size_type exists = find(key) != end();
                 if (iterator(_p.find(Leaf< Key, T >(key, T()))) != end())
+                {
                     _p.deleteNode(key);
-                return 1;
+                    _n--;
+                }
+                return exists;
             }
             void swap(map& x)
             {
                 RBTree< Key, T, Compare, Allocator > tmpP = x._p;
                 size_t tmpC = x._capacity;
                 size_t tmpN = x._n;
+                allocator_type tmpA = x._alloc;
                 x._p = this->_p;
                 x._capacity = this->_capacity;
                 x._n = this->_n;
+                x._alloc = _alloc;
                 this->_p = tmpP;
                 this->_capacity = tmpC;
                 this->_n = tmpN;
+                this->_alloc = tmpA;
             }
             size_type count(const Key& key) const
             {
@@ -300,7 +318,7 @@ namespace ft
                 iterator ite = end();
                 while (it != ite)
                 {
-                    if (!_key_compare(it->first, key))
+                    if (_key_compare(key, it->first))
                         return it;
                     it++;
                 }
@@ -312,7 +330,7 @@ namespace ft
                 const_iterator ite = end();
                 while (it != ite)
                 {
-                    if (!_key_compare(it->first, key))
+                    if (_key_compare(key, it->first))
                         return it;
                     it++;
                 }
