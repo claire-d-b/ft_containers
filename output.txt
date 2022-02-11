@@ -65,252 +65,378 @@ size: 0
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: 
-- key: 9 | value: J
-- key: 8 | value: II
-- key: 7 | value: HHH
-- key: 6 | value: GGGG
-- key: 5 | value: FFFFF
-- key: 4 | value: EEEEEE
-- key: 3 | value: DDDDDDD
-- key: 2 | value: CCCCCCCC
+- key: 0 | value: AAAAAAAAAA
 - key: 1 | value: BBBBBBBBB
+- key: 2 | value: CCCCCCCC
+- key: 3 | value: DDDDDDD
+- key: 4 | value: EEEEEE
+- key: 5 | value: FFFFF
+- key: 6 | value: GGGG
+- key: 7 | value: HHH
+- key: 8 | value: II
+- key: 9 | value: J
 ###############################################
 	-- [0] --
+key1
+R----4(BLACK)
+     L----2(BLACK)
+     |    L----1(BLACK)
+     |    |    L----0(BLACK)
+     |    R----3(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----9(BLACK)
+               R----0(BLACK)
+found value : 1
+deleted
+R----4(BLACK)
+     L----2(BLACK)
+     |    L----0(BLACK)
+     |    R----3(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----9(BLACK)
+               R----0(BLACK)
+erase1
 size: 0
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: 
-- key: 9 | value: J
-- key: 8 | value: II
-- key: 7 | value: HHH
-- key: 6 | value: GGGG
-- key: 5 | value: FFFFF
-- key: 4 | value: EEEEEE
-- key: 3 | value: DDDDDDD
+- key: 0 | value: AAAAAAAAAA
 - key: 2 | value: CCCCCCCC
-- key: 1 | value: BBBBBBBBB
+- key: 3 | value: DDDDDDD
+- key: 4 | value: EEEEEE
+- key: 5 | value: FFFFF
+- key: 6 | value: GGGG
+- key: 7 | value: HHH
+- key: 8 | value: II
+- key: 9 | value: J
 ###############################################
 	-- [1] --
+key0
+R----4(BLACK)
+     L----2(BLACK)
+     |    L----0(BLACK)
+     |    R----3(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----9(BLACK)
+               R----0(BLACK)
+found value : 0
+deleted
+R----4(BLACK)
+     L----2(BLACK)
+     |    R----3(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----9(BLACK)
+               R----0(BLACK)
+erase1
 size: 0
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: 
-- key: 9 | value: J
-- key: 8 | value: II
-- key: 7 | value: HHH
-- key: 6 | value: GGGG
-- key: 5 | value: FFFFF
-- key: 4 | value: EEEEEE
-- key: 3 | value: DDDDDDD
 - key: 2 | value: CCCCCCCC
-- key: 1 | value: BBBBBBBBB
+- key: 3 | value: DDDDDDD
+- key: 4 | value: EEEEEE
+- key: 5 | value: FFFFF
+- key: 6 | value: GGGG
+- key: 7 | value: HHH
+- key: 8 | value: II
+- key: 9 | value: J
 ###############################################
 	-- [2] --
+key9
+R----4(BLACK)
+     L----2(BLACK)
+     |    R----3(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----9(BLACK)
+               R----0(BLACK)
+found value : 9
+deleted
+R----4(BLACK)
+     L----2(BLACK)
+     |    R----3(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----0(BLACK)
+erase1
 size: 0
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: 
-- key: 9 | value: J
-- key: 8 | value: II
-- key: 7 | value: HHH
-- key: 6 | value: GGGG
-- key: 5 | value: FFFFF
-- key: 4 | value: EEEEEE
-- key: 3 | value: DDDDDDD
 - key: 2 | value: CCCCCCCC
-- key: 1 | value: BBBBBBBBB
+- key: 3 | value: DDDDDDD
+- key: 4 | value: EEEEEE
+- key: 5 | value: FFFFF
+- key: 6 | value: GGGG
+- key: 7 | value: HHH
+- key: 8 | value: II
 ###############################################
 	-- [3] --
+erase2
+key2
+R----4(BLACK)
+     L----2(BLACK)
+     |    R----3(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----0(BLACK)
+found value : 2
+deleted
+R----4(BLACK)
+     L----3(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----0(BLACK)
+key3
+R----4(BLACK)
+     L----3(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----0(BLACK)
+found value : 3
+deleted
+R----4(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----0(BLACK)
+key4
+:::::::::
+R----4(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----0(BLACK)
+R----8(BLACK)
+     L----4(BLACK)
+     |    R----6(BLACK)
+     |         L----5(BLACK)
+     |         R----7(BLACK)
+     R----0(BLACK)
+found value : 4
+deleted
+R----8(BLACK)
+     L----6(BLACK)
+     |    L----5(BLACK)
+     |    R----7(BLACK)
+     R----0(BLACK)
 size: 18446744073709551613
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: 
-- key: 9 | value: J
-- key: 8 | value: II
-- key: 7 | value: HHH
-- key: 6 | value: GGGG
 - key: 5 | value: FFFFF
-- key: 4 | value: EEEEEE
-- key: 3 | value: DDDDDDD
-- key: 2 | value: CCCCCCCC
-- key: 1 | value: BBBBBBBBB
+- key: 6 | value: GGGG
+- key: 7 | value: HHH
+- key: 8 | value: II
 ###############################################
 	-- [4] --
+erase2
+key6
+R----8(BLACK)
+     L----6(BLACK)
+     |    L----5(BLACK)
+     |    R----7(BLACK)
+     R----0(BLACK)
+found value : 6
+deleted
+R----8(BLACK)
+     L----5(BLACK)
+     |    R----7(BLACK)
+     R----0(BLACK)
+key7
+R----8(BLACK)
+     L----5(BLACK)
+     |    R----7(BLACK)
+     R----0(BLACK)
+found value : 7
+deleted
+R----8(BLACK)
+     L----5(BLACK)
+     R----0(BLACK)
 size: 18446744073709551611
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: 
-- key: 9 | value: J
-- key: 8 | value: II
-- key: 7 | value: HHH
-- key: 6 | value: GGGG
 - key: 5 | value: FFFFF
-- key: 4 | value: EEEEEE
-- key: 3 | value: DDDDDDD
-- key: 2 | value: CCCCCCCC
-- key: 1 | value: BBBBBBBBB
+- key: 8 | value: II
 ###############################################
 R----8(BLACK)
-     L----4(BLACK)
-     |    L----2(BLACK)
-     |    |    L----1(BLACK)
-     |    |    |    L----0(BLACK)
-     |    |    R----3(BLACK)
-     |    R----6(BLACK)
-     |         L----5(BLACK)
-     |         R----7(BLACK)
-     R----9(BLACK)
-          R----10(RED)
-               R----0(BLACK)
-R----10(BLACK)
-     L----8(BLACK)
-     |    L----4(BLACK)
-     |    |    L----2(BLACK)
-     |    |    |    L----1(BLACK)
-     |    |    |    |    L----0(BLACK)
-     |    |    |    R----3(BLACK)
-     |    |    R----6(BLACK)
-     |    |         L----5(BLACK)
-     |    |         R----7(BLACK)
-     |    R----9(BLACK)
-     R----11(BLACK)
+     L----5(BLACK)
+     R----10(BLACK)
           R----0(BLACK)
+R----8(BLACK)
+     L----5(BLACK)
+     R----10(BLACK)
+          R----11(RED)
+               R----0(BLACK)
 size: 18446744073709551613
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: 
-- key: 11 | value: Hi there
-- key: 10 | value: Hello
-- key: 9 | value: J
-- key: 8 | value: II
-- key: 7 | value: HHH
-- key: 6 | value: GGGG
 - key: 5 | value: FFFFF
-- key: 4 | value: EEEEEE
-- key: 3 | value: DDDDDDD
-- key: 2 | value: CCCCCCCC
-- key: 1 | value: BBBBBBBBB
+- key: 8 | value: II
+- key: 10 | value: Hello
+- key: 11 | value: Hi there
 ###############################################
 	-- [5] --
+erase2
+key8
+:::::::::
+R----8(BLACK)
+     L----5(BLACK)
+     R----10(BLACK)
+          R----11(RED)
+               R----0(BLACK)
+R----10(BLACK)
+     L----8(BLACK)
+     |    L----5(BLACK)
+     R----11(RED)
+          R----0(BLACK)
+found value : 8
+deleted
+R----10(BLACK)
+     L----5(BLACK)
+     R----11(RED)
+          R----0(BLACK)
+key10
+:::::::::
+R----10(BLACK)
+     L----5(BLACK)
+     R----11(RED)
+          R----0(BLACK)
+R----11(BLACK)
+     L----10(BLACK)
+     |    L----5(BLACK)
+     R----0(BLACK)
+found value : 10
+deleted
+R----11(BLACK)
+     L----5(BLACK)
+     R----0(BLACK)
+key11
+:::::::::
+R----11(BLACK)
+     L----5(BLACK)
+     R----0(BLACK)
 size: 18446744073709551610
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: 
-- key: 11 | value: Hi there
-- key: 9 | value: J
-- key: 8 | value: II
-- key: 7 | value: HHH
-- key: 6 | value: GGGG
 - key: 5 | value: FFFFF
-- key: 4 | value: EEEEEE
-- key: 3 | value: DDDDDDD
-- key: 2 | value: CCCCCCCC
-- key: 1 | value: BBBBBBBBB
 ###############################################
-R----8(BLACK)
-     L----4(BLACK)
-     |    L----2(BLACK)
-     |    |    L----1(BLACK)
-     |    |    |    L----0(BLACK)
-     |    |    R----3(BLACK)
-     |    R----6(BLACK)
-     |         L----5(BLACK)
-     |         R----7(BLACK)
-     R----11(BLACK)
-          L----9(BLACK)
-          R----12(RED)
-               R----0(BLACK)
-R----8(BLACK)
-     L----4(BLACK)
-     |    L----2(BLACK)
-     |    |    L----1(BLACK)
-     |    |    |    L----0(BLACK)
-     |    |    R----3(BLACK)
-     |    R----6(BLACK)
-     |         L----5(BLACK)
-     |         R----7(BLACK)
-     R----11(BLACK)
-          L----9(BLACK)
-          R----12(RED)
-               R----13(BLACK)
-                    R----0(BLACK)
-R----8(BLACK)
-     L----4(BLACK)
-     |    L----2(BLACK)
-     |    |    L----1(BLACK)
-     |    |    |    L----0(BLACK)
-     |    |    R----3(BLACK)
-     |    R----6(BLACK)
-     |         L----5(BLACK)
-     |         R----7(BLACK)
+R----5(BLACK)
+     R----12(BLACK)
+          R----0(BLACK)
+R----12(BLACK)
+     L----5(BLACK)
      R----13(BLACK)
-          L----11(BLACK)
-          |    L----9(BLACK)
-          |    R----12(RED)
+          R----0(BLACK)
+R----12(BLACK)
+     L----5(BLACK)
+     R----13(BLACK)
           R----14(RED)
                R----0(BLACK)
-R----8(BLACK)
-     L----4(BLACK)
-     |    L----2(BLACK)
-     |    |    L----1(BLACK)
-     |    |    |    L----0(BLACK)
-     |    |    R----3(BLACK)
-     |    R----6(BLACK)
-     |         L----5(BLACK)
-     |         R----7(BLACK)
-     R----13(BLACK)
-          L----11(BLACK)
-          |    L----9(BLACK)
-          |    R----12(RED)
-          R----14(RED)
-               R----15(BLACK)
-                    R----0(BLACK)
+R----13(BLACK)
+     L----12(BLACK)
+     |    L----5(BLACK)
+     R----14(BLACK)
+          R----15(BLACK)
+               R----0(BLACK)
 size: 18446744073709551614
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: 
-- key: 15 | value: FOUR
-- key: 14 | value: THREE
-- key: 13 | value: TWO
-- key: 12 | value: ONE
-- key: 11 | value: Hi there
-- key: 9 | value: J
-- key: 8 | value: II
-- key: 7 | value: HHH
-- key: 6 | value: GGGG
 - key: 5 | value: FFFFF
-- key: 4 | value: EEEEEE
-- key: 3 | value: DDDDDDD
-- key: 2 | value: CCCCCCCC
-- key: 1 | value: BBBBBBBBB
+- key: 12 | value: ONE
+- key: 13 | value: TWO
+- key: 14 | value: THREE
+- key: 15 | value: FOUR
 ###############################################
 	-- [6] --
-size: 18446744073709551599
+erase2
+key5
+R----13(BLACK)
+     L----12(BLACK)
+     |    L----5(BLACK)
+     R----14(BLACK)
+          R----15(BLACK)
+               R----0(BLACK)
+found value : 5
+deleted
+R----13(BLACK)
+     L----12(BLACK)
+     R----14(BLACK)
+          R----15(BLACK)
+               R----0(BLACK)
+key12
+R----13(BLACK)
+     L----12(BLACK)
+     R----14(BLACK)
+          R----15(BLACK)
+               R----0(BLACK)
+found value : 12
+deleted
+R----13(BLACK)
+     R----14(BLACK)
+          R----15(BLACK)
+               R----0(BLACK)
+key13
+:::::::::
+R----13(BLACK)
+     R----14(BLACK)
+          R----15(BLACK)
+               R----0(BLACK)
+R----14(BLACK)
+     L----13(BLACK)
+     R----15(BLACK)
+          R----0(BLACK)
+found value : 13
+deleted
+R----14(BLACK)
+     R----15(BLACK)
+          R----0(BLACK)
+key14
+:::::::::
+R----14(BLACK)
+     R----15(BLACK)
+          R----0(BLACK)
+R----15(BLACK)
+     L----14(BLACK)
+     R----0(BLACK)
+found value : 14
+deleted
+R----15(BLACK)
+     R----0(BLACK)
+key15
+:::::::::
+R----15(BLACK)
+     R----0(BLACK)
+size: 18446744073709551609
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: 
-- key: 15 | value: FOUR
-- key: 14 | value: THREE
-- key: 13 | value: TWO
-- key: 12 | value: ONE
-- key: 11 | value: Hi there
-- key: 9 | value: J
-- key: 8 | value: II
-- key: 7 | value: HHH
-- key: 6 | value: GGGG
-- key: 5 | value: FFFFF
-- key: 4 | value: EEEEEE
-- key: 3 | value: DDDDDDD
-- key: 2 | value: CCCCCCCC
-- key: 1 | value: BBBBBBBBB
 ###############################################

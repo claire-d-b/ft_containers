@@ -203,10 +203,13 @@ namespace ft
             {
                 if (!_p.getRoot())
                     return ;
-                _p.deleteNode(pos->first);
+                if (iterator(_p.find(*pos)) != end())
+                    _p.deleteNode(pos->first);
             }
             void erase(iterator first, iterator last, typename ft::enable_if<!is_integral<iterator>::value>::type* = NULL)
             {
+                if (!_p.getRoot())
+                    return ;
                 iterator it = first;
 				iterator	tmp;
 				size_type	difference = 0;
@@ -218,7 +221,8 @@ namespace ft
 					tmp = it;
 					if (i != difference - 1)
 						it++;
-                    _p.deleteNode(tmp->first);
+                    if (iterator(_p.find(*tmp)) != end())
+                        _p.deleteNode(tmp->first);
 					if (i != difference - 1)
 						it = iterator(_p.find(*it));
 				}
@@ -228,8 +232,9 @@ namespace ft
             {
                 if (!_p.getRoot())
                     return 0;
-                _p.deleteNode(Leaf< Key, T >(key, T()));
-                return 0;
+                if (iterator(_p.find(Leaf< Key, T >(key, T()))) != end())
+                    _p.deleteNode(key);
+                return 1;
             }
             void swap(map& x)
             {

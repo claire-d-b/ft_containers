@@ -358,7 +358,6 @@ namespace ft
                 last->parent = max;
                 if (node->parent)
                     recolor(root);
-                prettyPrint();
             }
             NodePtr getRoot() const
             {
@@ -398,203 +397,85 @@ namespace ft
                 if (root->left)
                     root->left->color = 0;
             }
-            int isDeletable(NodePtr found)
-            {
-                if (!found->parent && !found->left && found->right && found->right == last)
-                {
-                    initializeNode(found);
-                    initializeNode(last);
-                    initializeNode(root);
-                    delete found;
-                    found = NULL;
-                    root = NULL;
-                    end = 1;
-                    return 1;
-                }
-                if (!found->parent && found->right && found->right == last && found->left)
-                {
-                    root = found->left;
-                    root->parent = NULL;
-                    initializeNode(found);
-                    delete found;
-                    found = NULL;
-                    NodePtr max = findMaximum(root);
-                    max->right = last;
-                    last->parent = max;
-                    return 1;
-                }
-                if (!found->parent && !found->left && found->right && found->right != last)
-                {
-                    found->right->parent = NULL;
-                    root = found->right;
-                    root->parent = NULL;
-                    initializeNode(found);
-                    delete found;
-                    found = NULL;
-                    NodePtr max = findMaximum(root);
-                    max->right = last;
-                    last->parent = max;
-                    return 1;
-                }
-                if (found->left && found->right && found->right != last && !found->left->left && !found->left->right && !found->right->left && found->right->right == last)
-                    {
-                        if (found == found->parent->right)
-                        {
-                            found->parent->right = found->right;
-                            found->right->parent = found->parent;
-                            found->parent->right->left = found->left;
-                            found->left->parent = found->parent->right;
-                        }
-                        else
-                        {
-                            found->parent->left = found->right;
-                            found->right->parent = found->parent;
-                            found->parent->left->left = found->left;
-                            found->left->parent = found->parent->left;
-                        }
-                        initializeNode(found);
-                        delete found;
-                        found = NULL;
-                        NodePtr max = findMaximum(root);
-                        max->right = last;
-                        last->parent = max;
-                        return 1;
-                    }
-                    if (found->left && found->right && found->right == last)
-                    {
-                        if (found == found->parent->right)
-                        {
-                            found->parent->right = found->left;
-                            found->left->parent = found->parent;
-                        }
-                        else
-                        {
-                            found->parent->left = found->left;
-                            found->left->parent = found->parent;
-                        }
-                        initializeNode(found);
-                        delete found;
-                        found = NULL;
-                        NodePtr max = findMaximum(root);
-                        max->right = last;
-                        last->parent = max;
-                        return 1;
-                    }
-                    if (found->right && found->right != last && !found->left)
-                    {
-                        if (found == found->parent->right)
-                        {
-                            found->parent->right = found->right;
-                            found->right->parent = found->parent;
-                        }
-                        else
-                        {
-                            found->parent->left = found->right;
-                            found->right->parent = found->parent;
-                        }
-                        initializeNode(found);
-                        delete found;
-                        found = NULL;
-                        NodePtr max = findMaximum(root);
-                        max->right = last;
-                        last->parent = max;
-                        return 1;
-                    }
-                    if (found->right && found->right == last && !found->left)
-                    {
-                        if (found == found->parent->right)
-                        {
-                            found->parent->right = NULL;
-                            found->parent = NULL;
-                        }
-                        else
-                        {
-                            found->parent->left = NULL;
-                            found->parent = NULL;
-                        }
-                        initializeNode(found);
-                        delete found;
-                        found = NULL;
-                        NodePtr max = findMaximum(root);
-                        max->right = last;
-                        last->parent = max;
-                        return 1;
-                    }
-                    return 0;
-            }
             void deleteNode(Key value)
             {
                 NodePtr found = NULL;
                 NodePtr node = getRoot();
-                int i = 0;
-                while (node)
+                while (node && node != last)
                 {
                     if (node->first == value)
                     {
                         found = node;
                     }
-                    if (!_value_compare(Leaf< Key, T >(value, T()), *node) && node->first != value)
+                    if (!_value_compare(Leaf< Key, T >(value, T()), *node) && value != node->first)
                     {
-                        node = node->left;
-                    }
-                    else
                         node = node->right;
-                }
-                if (!found || (found && !found->parent))
-                {
-                    if (!found)
-                        return ;
+                    }
                     else
-                    {
-                        i = isDeletable(found);
-                        while (root && root->left && !i)
-                        {
-                            i = isDeletable(found);
-                            if (i)
-                                return ;
-                            rightRotate(root);
-                        }
-                        while (root && root->right && !i)
-                        {
-                            i = isDeletable(found);
-                            if (i)
-                                return ;
-                            leftRotate(root);
-                        }
-                    }
-                    return ;
+                        node = node->left;
                 }
-                if (_value_compare(Leaf< Key, T >(value, T()), *found->parent))
+                if (!found)
                 {
-                    while (found && found->left)
+                    return;
+                }
+                if (found == root)
+                {
+                    while (found == root && found->right != last)
                     {
-                        i = isDeletable(found);
-                        if (i)
-                        {
-                            if (root && end == 0)
-                                recolor(root);
-                            break ;
-                        }
-                        rightRotate(found);
+                        leftRotate(root);
                     }
+                    if (found == root && found->right == last && found->left)
+                    {
+                        root = found->left;
+                        found->left->parent = NULL;
+                        initializeNode(found);
+                        initializeNode(last);
+                        delete found;
+                        found = NULL;
+                        root->right = last;
+                        last->parent = root;
+                        return ;
+                    }
+                    if (found == root && found->right == last && !found->left)
+                    {
+                        initializeNode(found);
+                        initializeNode(last);
+                        initializeNode(root);
+                        delete found;
+                        found = NULL;
+                        last->parent = NULL;
+                        root = last;
+                        return ;
+                    }
+                }
+                if (found == found->parent->left)
+                {
+                    while (found->right != last && found->left)
+                        rightRotate(found);
+                    if (found == found->parent->right)
+                        found->parent->right = (found->left) ? found->left : found->right;
+                    else
+                        found->parent->left = (found->left) ? found->left : found->right;
                 }
                 else
                 {
-                    while (found && found->right)
-                    {
-                        i = isDeletable(found);
-                        if (i)
-                        {
-                            if (root && end == 0)
-                                recolor(root);
-                            break ;
-                        }
+                    while (found->right != last && found->left)
                         leftRotate(found);
-                    }
+                    if (found == found->parent->right)
+                        found->parent->right = (found->left) ? found->left : found->right;
+                    else
+                        found->parent->left = (found->left) ? found->left : found->right;
                 }
-              if (!i || found == root)
-                isDeletable(found);
-                //prettyPrint();
+                if (found->left)
+                    found->left->parent = found->parent;
+                if (found->right)
+                    found->right->parent = found->parent;
+                initializeNode(found);
+                delete found;
+                found = NULL;
+                NodePtr max = findMaximum(root);
+                max->right = last;
+                last->parent = max;
             }
             void printHelper(NodePtr root, std::string indent, bool last) const
             {
