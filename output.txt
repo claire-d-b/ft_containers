@@ -1,0 +1,488 @@
+R----0(BLACK)
+     R----1(BLACK)
+          R----0(BLACK)
+R----1(BLACK)
+     L----0(BLACK)
+     R----2(BLACK)
+          R----0(BLACK)
+R----1(BLACK)
+     L----0(BLACK)
+     R----2(BLACK)
+          R----3(RED)
+               R----0(BLACK)
+R----2(BLACK)
+     L----1(BLACK)
+     |    L----0(BLACK)
+     R----3(BLACK)
+          R----4(BLACK)
+               R----0(BLACK)
+R----4(BLACK)
+     L----2(BLACK)
+     |    L----1(BLACK)
+     |    |    L----0(BLACK)
+     |    R----3(BLACK)
+     R----5(BLACK)
+          R----0(BLACK)
+R----4(BLACK)
+     L----2(BLACK)
+     |    L----1(BLACK)
+     |    |    L----0(BLACK)
+     |    R----3(BLACK)
+     R----5(BLACK)
+          R----6(RED)
+               R----0(BLACK)
+R----6(BLACK)
+     L----4(BLACK)
+     |    L----2(BLACK)
+     |    |    L----1(BLACK)
+     |    |    |    L----0(BLACK)
+     |    |    R----3(BLACK)
+     |    R----5(BLACK)
+     R----7(BLACK)
+          R----0(BLACK)
+R----4(BLACK)
+     L----2(BLACK)
+     |    L----1(BLACK)
+     |    |    L----0(BLACK)
+     |    R----3(BLACK)
+     R----6(BLACK)
+          L----5(BLACK)
+          R----7(BLACK)
+               R----8(RED)
+                    R----0(BLACK)
+R----4(BLACK)
+     L----2(BLACK)
+     |    L----1(BLACK)
+     |    |    L----0(BLACK)
+     |    R----3(BLACK)
+     R----8(BLACK)
+          L----6(BLACK)
+          |    L----5(BLACK)
+          |    R----7(BLACK)
+          R----9(BLACK)
+               R----0(BLACK)
+R----8(BLACK)
+     L----4(BLACK)
+     |    L----2(BLACK)
+     |    |    L----1(BLACK)
+     |    |    |    L----0(BLACK)
+     |    |    R----3(BLACK)
+     |    R----6(BLACK)
+     |         L----5(BLACK)
+     |         R----7(BLACK)
+     R----9(BLACK)
+          R----10(RED)
+               R----0(BLACK)
+R----10(BLACK)
+     L----8(BLACK)
+     |    L----4(BLACK)
+     |    |    L----2(BLACK)
+     |    |    |    L----1(BLACK)
+     |    |    |    |    L----0(BLACK)
+     |    |    |    R----3(BLACK)
+     |    |    R----6(BLACK)
+     |    |         L----5(BLACK)
+     |    |         R----7(BLACK)
+     |    R----9(BLACK)
+     R----11(BLACK)
+          R----0(BLACK)
+R----8(BLACK)
+     L----4(BLACK)
+     |    L----2(BLACK)
+     |    |    L----1(BLACK)
+     |    |    |    L----0(BLACK)
+     |    |    R----3(BLACK)
+     |    R----6(BLACK)
+     |         L----5(BLACK)
+     |         R----7(BLACK)
+     R----10(BLACK)
+          L----9(BLACK)
+          R----11(BLACK)
+               R----12(RED)
+                    R----0(BLACK)
+R----8(BLACK)
+     L----4(BLACK)
+     |    L----2(BLACK)
+     |    |    L----1(BLACK)
+     |    |    |    L----0(BLACK)
+     |    |    R----3(BLACK)
+     |    R----6(BLACK)
+     |         L----5(BLACK)
+     |         R----7(BLACK)
+     R----12(BLACK)
+          L----10(BLACK)
+          |    L----9(BLACK)
+          |    R----11(BLACK)
+          R----13(BLACK)
+               R----0(BLACK)
+R----8(BLACK)
+     L----4(BLACK)
+     |    L----2(BLACK)
+     |    |    L----1(BLACK)
+     |    |    |    L----0(BLACK)
+     |    |    R----3(BLACK)
+     |    R----6(BLACK)
+     |         L----5(BLACK)
+     |         R----7(BLACK)
+     R----12(BLACK)
+          L----10(BLACK)
+          |    L----9(BLACK)
+          |    R----11(BLACK)
+          R----13(BLACK)
+               R----14(RED)
+                    R----0(BLACK)
+R----8(BLACK)
+     L----4(BLACK)
+     |    L----2(BLACK)
+     |    |    L----1(BLACK)
+     |    |    |    L----0(BLACK)
+     |    |    R----3(BLACK)
+     |    R----6(BLACK)
+     |         L----5(BLACK)
+     |         R----7(BLACK)
+     R----14(BLACK)
+          L----12(BLACK)
+          |    L----10(BLACK)
+          |    |    L----9(BLACK)
+          |    |    R----11(BLACK)
+          |    R----13(BLACK)
+          R----15(BLACK)
+               R----0(BLACK)
+R----8(BLACK)
+     L----4(BLACK)
+     |    L----2(BLACK)
+     |    |    L----1(BLACK)
+     |    |    |    L----0(BLACK)
+     |    |    R----3(BLACK)
+     |    R----6(BLACK)
+     |         L----5(BLACK)
+     |         R----7(BLACK)
+     R----14(BLACK)
+          L----12(BLACK)
+          |    L----10(BLACK)
+          |    |    L----9(BLACK)
+          |    |    R----11(BLACK)
+          |    R----13(BLACK)
+          R----15(BLACK)
+               R----16(RED)
+                    R----0(BLACK)
+R----14(BLACK)
+     L----8(BLACK)
+     |    L----4(BLACK)
+     |    |    L----2(BLACK)
+     |    |    |    L----1(BLACK)
+     |    |    |    |    L----0(BLACK)
+     |    |    |    R----3(BLACK)
+     |    |    R----6(BLACK)
+     |    |         L----5(BLACK)
+     |    |         R----7(BLACK)
+     |    R----12(BLACK)
+     |         L----10(BLACK)
+     |         |    L----9(BLACK)
+     |         |    R----11(BLACK)
+     |         R----13(BLACK)
+     R----15(BLACK)
+          R----16(RED)
+               R----17(BLACK)
+                    R----0(BLACK)
+R----14(BLACK)
+     L----8(BLACK)
+     |    L----4(BLACK)
+     |    |    L----2(BLACK)
+     |    |    |    L----1(BLACK)
+     |    |    |    |    L----0(BLACK)
+     |    |    |    R----3(BLACK)
+     |    |    R----6(BLACK)
+     |    |         L----5(BLACK)
+     |    |         R----7(BLACK)
+     |    R----12(BLACK)
+     |         L----10(BLACK)
+     |         |    L----9(BLACK)
+     |         |    R----11(BLACK)
+     |         R----13(BLACK)
+     R----17(BLACK)
+          L----15(BLACK)
+          |    R----16(RED)
+          R----18(RED)
+               R----0(BLACK)
+R----14(BLACK)
+     L----8(BLACK)
+     |    L----4(BLACK)
+     |    |    L----2(BLACK)
+     |    |    |    L----1(BLACK)
+     |    |    |    |    L----0(BLACK)
+     |    |    |    R----3(BLACK)
+     |    |    R----6(BLACK)
+     |    |         L----5(BLACK)
+     |    |         R----7(BLACK)
+     |    R----12(BLACK)
+     |         L----10(BLACK)
+     |         |    L----9(BLACK)
+     |         |    R----11(BLACK)
+     |         R----13(BLACK)
+     R----17(BLACK)
+          L----15(BLACK)
+          |    R----16(RED)
+          R----18(RED)
+               R----19(BLACK)
+                    R----0(BLACK)
+size: 0
+max_size: 576460752303423488
+
+Content is:
+- key: 0 | value: 
+- key: 19 | value: T
+- key: 18 | value: SS
+- key: 17 | value: RRR
+- key: 16 | value: QQQQ
+- key: 15 | value: PPPPP
+- key: 14 | value: OOOOOO
+- key: 13 | value: NNNNNNN
+- key: 12 | value: MMMMMMMM
+- key: 11 | value: LLLLLLLLL
+- key: 10 | value: KKKKKKKKKK
+- key: 9 | value: JJJJJJJJJJJ
+- key: 8 | value: IIIIIIIIIIII
+- key: 7 | value: HHHHHHHHHHHHH
+- key: 6 | value: GGGGGGGGGGGGGG
+- key: 5 | value: FFFFFFFFFFFFFFF
+- key: 4 | value: EEEEEEEEEEEEEEEE
+- key: 3 | value: DDDDDDDDDDDDDDDDD
+- key: 2 | value: CCCCCCCCCCCCCCCCCC
+- key: 1 | value: BBBBBBBBBBBBBBBBBBB
+###############################################
+	-- [0] --
+***** pos first *****1
+size: 0
+max_size: 576460752303423488
+
+Content is:
+- key: 0 | value: 
+- key: 19 | value: T
+- key: 18 | value: SS
+- key: 17 | value: RRR
+- key: 16 | value: QQQQ
+- key: 15 | value: PPPPP
+- key: 14 | value: OOOOOO
+- key: 13 | value: NNNNNNN
+- key: 12 | value: MMMMMMMM
+- key: 11 | value: LLLLLLLLL
+- key: 10 | value: KKKKKKKKKK
+- key: 9 | value: JJJJJJJJJJJ
+- key: 8 | value: IIIIIIIIIIII
+- key: 7 | value: HHHHHHHHHHHHH
+- key: 6 | value: GGGGGGGGGGGGGG
+- key: 5 | value: FFFFFFFFFFFFFFF
+- key: 4 | value: EEEEEEEEEEEEEEEE
+- key: 3 | value: DDDDDDDDDDDDDDDDD
+- key: 2 | value: CCCCCCCCCCCCCCCCCC
+- key: 1 | value: BBBBBBBBBBBBBBBBBBB
+###############################################
+	-- [1] --
+***** pos first *****0
+size: 0
+max_size: 576460752303423488
+
+Content is:
+- key: 0 | value: 
+- key: 19 | value: T
+- key: 18 | value: SS
+- key: 17 | value: RRR
+- key: 16 | value: QQQQ
+- key: 15 | value: PPPPP
+- key: 14 | value: OOOOOO
+- key: 13 | value: NNNNNNN
+- key: 12 | value: MMMMMMMM
+- key: 11 | value: LLLLLLLLL
+- key: 10 | value: KKKKKKKKKK
+- key: 9 | value: JJJJJJJJJJJ
+- key: 8 | value: IIIIIIIIIIII
+- key: 7 | value: HHHHHHHHHHHHH
+- key: 6 | value: GGGGGGGGGGGGGG
+- key: 5 | value: FFFFFFFFFFFFFFF
+- key: 4 | value: EEEEEEEEEEEEEEEE
+- key: 3 | value: DDDDDDDDDDDDDDDDD
+- key: 2 | value: CCCCCCCCCCCCCCCCCC
+- key: 1 | value: BBBBBBBBBBBBBBBBBBB
+###############################################
+	-- [2] --
+***** pos first *****19
+size: 0
+max_size: 576460752303423488
+
+Content is:
+- key: 0 | value: 
+- key: 19 | value: T
+- key: 18 | value: SS
+- key: 17 | value: RRR
+- key: 16 | value: QQQQ
+- key: 15 | value: PPPPP
+- key: 14 | value: OOOOOO
+- key: 13 | value: NNNNNNN
+- key: 12 | value: MMMMMMMM
+- key: 11 | value: LLLLLLLLL
+- key: 10 | value: KKKKKKKKKK
+- key: 9 | value: JJJJJJJJJJJ
+- key: 8 | value: IIIIIIIIIIII
+- key: 7 | value: HHHHHHHHHHHHH
+- key: 6 | value: GGGGGGGGGGGGGG
+- key: 5 | value: FFFFFFFFFFFFFFF
+- key: 4 | value: EEEEEEEEEEEEEEEE
+- key: 3 | value: DDDDDDDDDDDDDDDDD
+- key: 2 | value: CCCCCCCCCCCCCCCCCC
+- key: 1 | value: BBBBBBBBBBBBBBBBBBB
+###############################################
+	-- [3] --
+size: 18446744073709551613
+max_size: 576460752303423488
+
+Content is:
+- key: 0 | value: 
+- key: 19 | value: T
+- key: 18 | value: SS
+- key: 17 | value: RRR
+- key: 16 | value: QQQQ
+- key: 15 | value: PPPPP
+- key: 14 | value: OOOOOO
+- key: 13 | value: NNNNNNN
+- key: 12 | value: MMMMMMMM
+- key: 11 | value: LLLLLLLLL
+- key: 10 | value: KKKKKKKKKK
+- key: 9 | value: JJJJJJJJJJJ
+- key: 8 | value: IIIIIIIIIIII
+- key: 7 | value: HHHHHHHHHHHHH
+- key: 6 | value: GGGGGGGGGGGGGG
+- key: 5 | value: FFFFFFFFFFFFFFF
+- key: 4 | value: EEEEEEEEEEEEEEEE
+- key: 3 | value: DDDDDDDDDDDDDDDDD
+- key: 2 | value: CCCCCCCCCCCCCCCCCC
+- key: 1 | value: BBBBBBBBBBBBBBBBBBB
+###############################################
+	-- [4] --
+size: 18446744073709551611
+max_size: 576460752303423488
+
+Content is:
+- key: 0 | value: 
+- key: 19 | value: T
+- key: 18 | value: SS
+- key: 17 | value: RRR
+- key: 16 | value: QQQQ
+- key: 15 | value: PPPPP
+- key: 14 | value: OOOOOO
+- key: 13 | value: NNNNNNN
+- key: 12 | value: MMMMMMMM
+- key: 11 | value: LLLLLLLLL
+- key: 10 | value: KKKKKKKKKK
+- key: 9 | value: JJJJJJJJJJJ
+- key: 8 | value: IIIIIIIIIIII
+- key: 7 | value: HHHHHHHHHHHHH
+- key: 6 | value: GGGGGGGGGGGGGG
+- key: 5 | value: FFFFFFFFFFFFFFF
+- key: 4 | value: EEEEEEEEEEEEEEEE
+- key: 3 | value: DDDDDDDDDDDDDDDDD
+- key: 2 | value: CCCCCCCCCCCCCCCCCC
+- key: 1 | value: BBBBBBBBBBBBBBBBBBB
+###############################################
+size: 18446744073709551611
+max_size: 576460752303423488
+
+Content is:
+- key: 0 | value: 
+- key: 19 | value: T
+- key: 18 | value: SS
+- key: 17 | value: RRR
+- key: 16 | value: QQQQ
+- key: 15 | value: PPPPP
+- key: 14 | value: OOOOOO
+- key: 13 | value: NNNNNNN
+- key: 12 | value: MMMMMMMM
+- key: 11 | value: Hi there
+- key: 10 | value: Hello
+- key: 9 | value: JJJJJJJJJJJ
+- key: 8 | value: IIIIIIIIIIII
+- key: 7 | value: HHHHHHHHHHHHH
+- key: 6 | value: GGGGGGGGGGGGGG
+- key: 5 | value: FFFFFFFFFFFFFFF
+- key: 4 | value: EEEEEEEEEEEEEEEE
+- key: 3 | value: DDDDDDDDDDDDDDDDD
+- key: 2 | value: CCCCCCCCCCCCCCCCCC
+- key: 1 | value: BBBBBBBBBBBBBBBBBBB
+###############################################
+	-- [5] --
+size: 18446744073709551608
+max_size: 576460752303423488
+
+Content is:
+- key: 0 | value: 
+- key: 19 | value: T
+- key: 18 | value: SS
+- key: 17 | value: RRR
+- key: 16 | value: QQQQ
+- key: 15 | value: PPPPP
+- key: 14 | value: OOOOOO
+- key: 13 | value: NNNNNNN
+- key: 12 | value: MMMMMMMM
+- key: 11 | value: Hi there
+- key: 10 | value: Hello
+- key: 9 | value: JJJJJJJJJJJ
+- key: 8 | value: IIIIIIIIIIII
+- key: 7 | value: HHHHHHHHHHHHH
+- key: 6 | value: GGGGGGGGGGGGGG
+- key: 5 | value: FFFFFFFFFFFFFFF
+- key: 4 | value: EEEEEEEEEEEEEEEE
+- key: 3 | value: DDDDDDDDDDDDDDDDD
+- key: 2 | value: CCCCCCCCCCCCCCCCCC
+- key: 1 | value: BBBBBBBBBBBBBBBBBBB
+###############################################
+size: 18446744073709551608
+max_size: 576460752303423488
+
+Content is:
+- key: 0 | value: 
+- key: 19 | value: T
+- key: 18 | value: SS
+- key: 17 | value: RRR
+- key: 16 | value: QQQQ
+- key: 15 | value: FOUR
+- key: 14 | value: THREE
+- key: 13 | value: TWO
+- key: 12 | value: ONE
+- key: 11 | value: Hi there
+- key: 10 | value: Hello
+- key: 9 | value: JJJJJJJJJJJ
+- key: 8 | value: IIIIIIIIIIII
+- key: 7 | value: HHHHHHHHHHHHH
+- key: 6 | value: GGGGGGGGGGGGGG
+- key: 5 | value: FFFFFFFFFFFFFFF
+- key: 4 | value: EEEEEEEEEEEEEEEE
+- key: 3 | value: DDDDDDDDDDDDDDDDD
+- key: 2 | value: CCCCCCCCCCCCCCCCCC
+- key: 1 | value: BBBBBBBBBBBBBBBBBBB
+###############################################
+	-- [6] --
+size: 18446744073709551588
+max_size: 576460752303423488
+
+Content is:
+- key: 0 | value: 
+- key: 19 | value: T
+- key: 18 | value: SS
+- key: 17 | value: RRR
+- key: 16 | value: QQQQ
+- key: 15 | value: FOUR
+- key: 14 | value: THREE
+- key: 13 | value: TWO
+- key: 12 | value: ONE
+- key: 11 | value: Hi there
+- key: 10 | value: Hello
+- key: 9 | value: JJJJJJJJJJJ
+- key: 8 | value: IIIIIIIIIIII
+- key: 7 | value: HHHHHHHHHHHHH
+- key: 6 | value: GGGGGGGGGGGGGG
+- key: 5 | value: FFFFFFFFFFFFFFF
+- key: 4 | value: EEEEEEEEEEEEEEEE
+- key: 3 | value: DDDDDDDDDDDDDDDDD
+- key: 2 | value: CCCCCCCCCCCCCCCCCC
+- key: 1 | value: BBBBBBBBBBBBBBBBBBB
+###############################################

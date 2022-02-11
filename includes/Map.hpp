@@ -53,8 +53,8 @@ namespace ft
             typedef typename allocator_type::const_pointer const_pointer;
             typedef biIter< leaf_type* > iterator;
             typedef biIter< const_leaf_type* > const_iterator;
-            typedef biReviter< iterator > reverse_iterator;
-            typedef biReviter< const_iterator > const_reverse_iterator;
+            typedef biReviter< leaf_type* > reverse_iterator;
+            typedef biReviter< const_leaf_type* > const_reverse_iterator;
             explicit map(const Compare& comp = key_compare(), const Allocator& alloc = Allocator()) : _value_compare(comp), _key_compare(comp), _p(RBTree< Key, T, Compare, Allocator >(comp)), _n(0), _capacity(0), _alloc(alloc)
             {
                 Leaf< Key, T > *end = new Leaf< Key, T >(key_type(), mapped_type());
@@ -131,23 +131,23 @@ namespace ft
             }
             reverse_iterator rbegin()
             {
-                return reverse_iterator(end());
+                return reverse_iterator(_p.getLast());
             }
             const_reverse_iterator rbegin() const
             {
-                return const_reverse_iterator(end());
+                return const_reverse_iterator(_p.getLast());
             }
             reverse_iterator rend()
             {
                 if (_p.getRoot())
-                    return reverse_iterator(begin());
-                return reverse_iterator(end());
+                    return reverse_iterator(_p.findMinimum(_p.getRoot()));
+                return reverse_iterator(_p.getLast());
             }
             const_reverse_iterator rend() const
             {
                 if (_p.getRoot())
-                    return const_reverse_iterator(begin());
-                return const_reverse_iterator(end());
+                    return const_reverse_iterator(_p.findMinimum(_p.getRoot()));
+                return const_reverse_iterator(_p.getLast());
             }
             bool empty() const
             {

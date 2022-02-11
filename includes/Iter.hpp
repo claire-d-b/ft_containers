@@ -50,7 +50,7 @@ namespace ft
             typedef typename iterator_traits<T>::reference			reference;
             typedef typename iterator_traits<T>::iterator_category	iterator_category;
             typedef T iterator_type;
-            typedef const value_type *			const_iterator_type;
+            typedef const T			const_iterator_type;
 
             iter() : _it(T()) {}
             iter(iterator_type x) : _it(x) {}
@@ -89,7 +89,7 @@ namespace ft
             typedef	typename iterator_traits<T>::reference			reference;
             typedef	typename iterator_traits<T>::iterator_category	iterator_category;
             typedef T iterator_type;
-            typedef const value_type *			const_iterator_type;
+            typedef const T			const_iterator_type;
             reviter() : _it(T()) {}
             reviter(iterator_type x) : _it(x) {}
             template< class U >
@@ -176,7 +176,7 @@ namespace ft
             typedef typename iterator_traits<T>::reference			reference;
             typedef typename iterator_traits<T>::iterator_category	iterator_category;
             typedef T iterator_type;
-            typedef const value_type *			const_iterator_type;
+            typedef const T			const_iterator_type;
 
             biIter() : _it(T()) {}
             biIter(iterator_type x) : _it(x) {}
@@ -185,6 +185,8 @@ namespace ft
             template< class U >
             biIter& operator=(U & other) {_it = &(*other); return *this;}
             virtual ~biIter() {}
+            bool operator==(biIter const &rhs) const { return (_it == rhs._it);}
+		    bool operator!=(biIter const &rhs) const { return (!(_it == rhs._it));}
             biIter& operator++()
             {
                 (*this)++;
@@ -257,7 +259,7 @@ namespace ft
             typedef	typename iterator_traits<T>::reference			reference;
             typedef	typename iterator_traits<T>::iterator_category	iterator_category;
             typedef T iterator_type;
-            typedef const value_type *			const_iterator_type;
+            typedef const T			const_iterator_type;
             biReviter() : _it(T()) {}
             biReviter(iterator_type x) : _it(x) {}
             template< class U >
@@ -265,6 +267,8 @@ namespace ft
             template< class U >
             biReviter& operator=(U & other) {_it = other.base(); return *this;}
             virtual ~biReviter() {}
+            bool operator==(biReviter const &rhs) const { return (_it == rhs._it);}
+		    bool operator!=(biReviter const &rhs) const { return (!(_it == rhs._it));}
             biReviter& operator--()
             {
                 (*this)--;
