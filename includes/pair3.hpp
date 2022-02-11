@@ -397,6 +397,74 @@ namespace ft
                 if (root->left)
                     root->left->color = 0;
             }
+            int isDeletable(NodePtr found)
+            {
+                if (found->left && found->right && found->right != last && !found->left->left && !found->left->right && !found->right->left && (found->right->right == last || !found->right->right))
+                {
+                    if (found == found->parent->right)
+                    {
+                        found->parent->right = found->left;
+                        found->left->parent = found->parent;
+                        found->parent->right->right = found->right;
+                        found->right->parent = found->left;
+                        initializeNode(found);
+                        delete found;
+                        found = NULL;
+                        NodePtr max = findMaximum(root);
+                        max->right = last;
+                        last->parent = max;
+                    }
+                    else
+                    {
+                        found->parent->left = found->right;
+                        found->right->parent = found->parent;
+                        found->parent->left->left = found->left;
+                        found->left->parent = found->right;
+                        initializeNode(found);
+                        delete found;
+                        found = NULL;
+                        NodePtr max = findMaximum(root);
+                        max->right = last;
+                        last->parent = max;
+                    }
+                    return 1;
+                }
+                return 0;
+            }
+            int isRoot(NodePtr found)
+            {
+                if (found == root)
+                {
+                    while (found == root && found->right != last)
+                    {
+                        leftRotate(root);
+                    }
+                    if (found == root && found->right == last && found->left)
+                    {
+                        root = found->left;
+                        found->left->parent = NULL;
+                        initializeNode(found);
+                        initializeNode(last);
+                        delete found;
+                        found = NULL;
+                        root->right = last;
+                        last->parent = root;
+                        return 1;
+                    }
+                    if (found == root && found->right == last && !found->left)
+                    {
+                        initializeNode(found);
+                        initializeNode(last);
+                        initializeNode(root);
+                        delete found;
+                        found = NULL;
+                        last->parent = NULL;
+                        root = NULL;
+                        return 1;
+                    }
+                }
+                return 0;
+            }
             void deleteNode(Key value)
             {
                 NodePtr found = NULL;
@@ -418,40 +486,18 @@ namespace ft
                 {
                     return;
                 }
-                if (found == root)
-                {
-                    while (found == root && found->right != last)
-                    {
-                        leftRotate(root);
-                    }
-                    if (found == root && found->right == last && found->left)
-                    {
-                        root = found->left;
-                        found->left->parent = NULL;
-                        initializeNode(found);
-                        initializeNode(last);
-                        delete found;
-                        found = NULL;
-                        root->right = last;
-                        last->parent = root;
-                        return ;
-                    }
-                    if (found == root && found->right == last && !found->left)
-                    {
-                        initializeNode(found);
-                        initializeNode(last);
-                        initializeNode(root);
-                        delete found;
-                        found = NULL;
-                        last->parent = NULL;
-                        root = last;
-                        return ;
-                    }
-                }
+                if (isRoot(found) || isDeletable(found))
+                    return ;
                 if (found == found->parent->left)
                 {
-                    while (found->right != last && found->left)
+                    while (found->right && found->right != last && found->left)
+                    {
+                        if (isRoot(found) || isDeletable(found))
+                            return ;
                         rightRotate(found);
+                    }
+                    if (isRoot(found) || isDeletable(found))
+                            return ;
                     if (found == found->parent->right)
                         found->parent->right = (found->left) ? found->left : found->right;
                     else
@@ -459,8 +505,14 @@ namespace ft
                 }
                 else
                 {
-                    while (found->right != last && found->left)
+                    while (found->right && found->right != last && found->left)
+                    {
+                        if (isRoot(found) || isDeletable(found))
+                            return ;
                         leftRotate(found);
+                    }
+                    if (isRoot(found) || isDeletable(found))
+                            return ;
                     if (found == found->parent->right)
                         found->parent->right = (found->left) ? found->left : found->right;
                     else
@@ -468,7 +520,7 @@ namespace ft
                 }
                 if (found->left)
                     found->left->parent = found->parent;
-                if (found->right)
+                if (found->right && found->right != last)
                     found->right->parent = found->parent;
                 initializeNode(found);
                 delete found;

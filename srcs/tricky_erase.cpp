@@ -1,4 +1,4 @@
-#include "common.hpp"
+#include "common_copy.hpp"
 
 #define T1 int
 #define T2 std::string

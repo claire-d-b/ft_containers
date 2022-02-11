@@ -1,442 +1,450 @@
-R----0(BLACK)
-     R----1(BLACK)
-          R----0(BLACK)
-R----1(BLACK)
-     L----0(BLACK)
-     R----2(BLACK)
-          R----0(BLACK)
-R----1(BLACK)
-     L----0(BLACK)
-     R----2(BLACK)
-          R----3(RED)
-               R----0(BLACK)
-R----2(BLACK)
-     L----1(BLACK)
-     |    L----0(BLACK)
-     R----3(BLACK)
-          R----4(BLACK)
-               R----0(BLACK)
-R----4(BLACK)
-     L----2(BLACK)
-     |    L----1(BLACK)
-     |    |    L----0(BLACK)
-     |    R----3(BLACK)
-     R----5(BLACK)
-          R----0(BLACK)
-R----4(BLACK)
-     L----2(BLACK)
-     |    L----1(BLACK)
-     |    |    L----0(BLACK)
-     |    R----3(BLACK)
-     R----5(BLACK)
-          R----6(RED)
-               R----0(BLACK)
-R----6(BLACK)
-     L----4(BLACK)
-     |    L----2(BLACK)
-     |    |    L----1(BLACK)
-     |    |    |    L----0(BLACK)
-     |    |    R----3(BLACK)
-     |    R----5(BLACK)
-     R----7(BLACK)
-          R----0(BLACK)
-R----4(BLACK)
-     L----2(BLACK)
-     |    L----1(BLACK)
-     |    |    L----0(BLACK)
-     |    R----3(BLACK)
-     R----6(BLACK)
-          L----5(BLACK)
-          R----7(BLACK)
-               R----8(RED)
-                    R----0(BLACK)
-R----4(BLACK)
-     L----2(BLACK)
-     |    L----1(BLACK)
-     |    |    L----0(BLACK)
-     |    R----3(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----9(BLACK)
-               R----0(BLACK)
-size: 0
+hello
+size: 31
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: AAAAAAAAAA
-- key: 1 | value: BBBBBBBBB
-- key: 2 | value: CCCCCCCC
-- key: 3 | value: DDDDDDD
-- key: 4 | value: EEEEEE
-- key: 5 | value: FFFFF
-- key: 6 | value: GGGG
-- key: 7 | value: HHH
-- key: 8 | value: II
-- key: 9 | value: J
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 22 | value: 123
+- key: 23 | value: coconut
+- key: 24 | value: 345
+- key: 25 | value: funny
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 54 | value: 6
+- key: 55 | value: fuzzy
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
 	-- [0] --
-key1
-R----4(BLACK)
-     L----2(BLACK)
-     |    L----1(BLACK)
-     |    |    L----0(BLACK)
-     |    R----3(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----9(BLACK)
-               R----0(BLACK)
-found value : 1
-deleted
-R----4(BLACK)
-     L----2(BLACK)
-     |    L----0(BLACK)
-     |    R----3(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----9(BLACK)
-               R----0(BLACK)
-erase1
-size: 0
+size: 31
 max_size: 576460752303423488
 
 Content is:
-- key: 0 | value: AAAAAAAAAA
-- key: 2 | value: CCCCCCCC
-- key: 3 | value: DDDDDDD
-- key: 4 | value: EEEEEE
-- key: 5 | value: FFFFF
-- key: 6 | value: GGGG
-- key: 7 | value: HHH
-- key: 8 | value: II
-- key: 9 | value: J
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 22 | value: 123
+- key: 23 | value: coconut
+- key: 24 | value: 345
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 54 | value: 6
+- key: 55 | value: fuzzy
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
 	-- [1] --
-key0
-R----4(BLACK)
-     L----2(BLACK)
-     |    L----0(BLACK)
-     |    R----3(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----9(BLACK)
-               R----0(BLACK)
-found value : 0
-deleted
-R----4(BLACK)
-     L----2(BLACK)
-     |    R----3(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----9(BLACK)
-               R----0(BLACK)
-erase1
-size: 0
+size: 31
 max_size: 576460752303423488
 
 Content is:
-- key: 2 | value: CCCCCCCC
-- key: 3 | value: DDDDDDD
-- key: 4 | value: EEEEEE
-- key: 5 | value: FFFFF
-- key: 6 | value: GGGG
-- key: 7 | value: HHH
-- key: 8 | value: II
-- key: 9 | value: J
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 22 | value: 123
+- key: 23 | value: coconut
+- key: 24 | value: 345
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 54 | value: 6
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
 	-- [2] --
-key9
-R----4(BLACK)
-     L----2(BLACK)
-     |    R----3(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----9(BLACK)
-               R----0(BLACK)
-found value : 9
-deleted
-R----4(BLACK)
-     L----2(BLACK)
-     |    R----3(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----0(BLACK)
-erase1
-size: 0
+size: 31
 max_size: 576460752303423488
 
 Content is:
-- key: 2 | value: CCCCCCCC
-- key: 3 | value: DDDDDDD
-- key: 4 | value: EEEEEE
-- key: 5 | value: FFFFF
-- key: 6 | value: GGGG
-- key: 7 | value: HHH
-- key: 8 | value: II
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 22 | value: 123
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 54 | value: 6
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
 	-- [3] --
-erase2
-key2
-R----4(BLACK)
-     L----2(BLACK)
-     |    R----3(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----0(BLACK)
-found value : 2
-deleted
-R----4(BLACK)
-     L----3(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----0(BLACK)
-key3
-R----4(BLACK)
-     L----3(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----0(BLACK)
-found value : 3
-deleted
-R----4(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----0(BLACK)
-key4
-:::::::::
-R----4(BLACK)
-     R----8(BLACK)
-          L----6(BLACK)
-          |    L----5(BLACK)
-          |    R----7(BLACK)
-          R----0(BLACK)
-R----8(BLACK)
-     L----4(BLACK)
-     |    R----6(BLACK)
-     |         L----5(BLACK)
-     |         R----7(BLACK)
-     R----0(BLACK)
-found value : 4
-deleted
-R----8(BLACK)
-     L----6(BLACK)
-     |    L----5(BLACK)
-     |    R----7(BLACK)
-     R----0(BLACK)
-size: 18446744073709551613
+size: 31
 max_size: 576460752303423488
 
 Content is:
-- key: 5 | value: FFFFF
-- key: 6 | value: GGGG
-- key: 7 | value: HHH
-- key: 8 | value: II
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 22 | value: 123
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
 	-- [4] --
-erase2
-key6
-R----8(BLACK)
-     L----6(BLACK)
-     |    L----5(BLACK)
-     |    R----7(BLACK)
-     R----0(BLACK)
-found value : 6
-deleted
-R----8(BLACK)
-     L----5(BLACK)
-     |    R----7(BLACK)
-     R----0(BLACK)
-key7
-R----8(BLACK)
-     L----5(BLACK)
-     |    R----7(BLACK)
-     R----0(BLACK)
-found value : 7
-deleted
-R----8(BLACK)
-     L----5(BLACK)
-     R----0(BLACK)
-size: 18446744073709551611
+size: 31
 max_size: 576460752303423488
 
 Content is:
-- key: 5 | value: FFFFF
-- key: 8 | value: II
-###############################################
-R----8(BLACK)
-     L----5(BLACK)
-     R----10(BLACK)
-          R----0(BLACK)
-R----8(BLACK)
-     L----5(BLACK)
-     R----10(BLACK)
-          R----11(RED)
-               R----0(BLACK)
-size: 18446744073709551613
-max_size: 576460752303423488
-
-Content is:
-- key: 5 | value: FFFFF
-- key: 8 | value: II
-- key: 10 | value: Hello
-- key: 11 | value: Hi there
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 51 | value: 5
+- key: 53 | value: this is a test
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
 	-- [5] --
-erase2
-key8
-:::::::::
-R----8(BLACK)
-     L----5(BLACK)
-     R----10(BLACK)
-          R----11(RED)
-               R----0(BLACK)
-R----10(BLACK)
-     L----8(BLACK)
-     |    L----5(BLACK)
-     R----11(RED)
-          R----0(BLACK)
-found value : 8
-deleted
-R----10(BLACK)
-     L----5(BLACK)
-     R----11(RED)
-          R----0(BLACK)
-key10
-:::::::::
-R----10(BLACK)
-     L----5(BLACK)
-     R----11(RED)
-          R----0(BLACK)
-R----11(BLACK)
-     L----10(BLACK)
-     |    L----5(BLACK)
-     R----0(BLACK)
-found value : 10
-deleted
-R----11(BLACK)
-     L----5(BLACK)
-     R----0(BLACK)
-key11
-:::::::::
-R----11(BLACK)
-     L----5(BLACK)
-     R----0(BLACK)
-size: 18446744073709551610
+size: 31
 max_size: 576460752303423488
 
 Content is:
-- key: 5 | value: FFFFF
-###############################################
-R----5(BLACK)
-     R----12(BLACK)
-          R----0(BLACK)
-R----12(BLACK)
-     L----5(BLACK)
-     R----13(BLACK)
-          R----0(BLACK)
-R----12(BLACK)
-     L----5(BLACK)
-     R----13(BLACK)
-          R----14(RED)
-               R----0(BLACK)
-R----13(BLACK)
-     L----12(BLACK)
-     |    L----5(BLACK)
-     R----14(BLACK)
-          R----15(BLACK)
-               R----0(BLACK)
-size: 18446744073709551614
-max_size: 576460752303423488
-
-Content is:
-- key: 5 | value: FFFFF
-- key: 12 | value: ONE
-- key: 13 | value: TWO
-- key: 14 | value: THREE
-- key: 15 | value: FOUR
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 21 | value: fizz
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 53 | value: this is a test
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
 	-- [6] --
-erase2
-key5
-R----13(BLACK)
-     L----12(BLACK)
-     |    L----5(BLACK)
-     R----14(BLACK)
-          R----15(BLACK)
-               R----0(BLACK)
-found value : 5
-deleted
-R----13(BLACK)
-     L----12(BLACK)
-     R----14(BLACK)
-          R----15(BLACK)
-               R----0(BLACK)
-key12
-R----13(BLACK)
-     L----12(BLACK)
-     R----14(BLACK)
-          R----15(BLACK)
-               R----0(BLACK)
-found value : 12
-deleted
-R----13(BLACK)
-     R----14(BLACK)
-          R----15(BLACK)
-               R----0(BLACK)
-key13
-:::::::::
-R----13(BLACK)
-     R----14(BLACK)
-          R----15(BLACK)
-               R----0(BLACK)
-R----14(BLACK)
-     L----13(BLACK)
-     R----15(BLACK)
-          R----0(BLACK)
-found value : 13
-deleted
-R----14(BLACK)
-     R----15(BLACK)
-          R----0(BLACK)
-key14
-:::::::::
-R----14(BLACK)
-     R----15(BLACK)
-          R----0(BLACK)
-R----15(BLACK)
-     L----14(BLACK)
-     R----0(BLACK)
-found value : 14
-deleted
-R----15(BLACK)
-     R----0(BLACK)
-key15
-:::::::::
-R----15(BLACK)
-     R----0(BLACK)
-size: 18446744073709551609
+size: 31
 max_size: 576460752303423488
 
 Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 53 | value: this is a test
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+	-- [7] --
+size: 31
+max_size: 576460752303423488
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 20 | value: idea
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+	-- [8] --
+size: 31
+max_size: 576460752303423488
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 23 | value: coconut
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+	-- [9] --
+size: 31
+max_size: 576460752303423488
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 42 | value: lol
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+	-- [10] --
+size: 31
+max_size: 576460752303423488
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 38 | value: 38
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+	-- [11] --
+size: 31
+max_size: 576460752303423488
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 35 | value: fiesta
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+	-- [12] --
+size: 31
+max_size: 576460752303423488
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 33 | value: 33
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
+###############################################
+	-- [13] --
+size: 31
+max_size: 576460752303423488
+
+Content is:
+- key: 12 | value: no
+- key: 18 | value: bee
+- key: 27 | value: 27
+- key: 28 | value: diary
+- key: 29 | value: 29
+- key: 30 | value: buzz
+- key: 43 | value: 1
+- key: 44 | value: hello
+- key: 45 | value: 2
+- key: 46 | value: bunny
+- key: 47 | value: 3
+- key: 48 | value: world
+- key: 49 | value: 4
+- key: 50 | value: mdr
+- key: 60 | value: 7
+- key: 80 | value: hey
+- key: 90 | value: 8
 ###############################################
