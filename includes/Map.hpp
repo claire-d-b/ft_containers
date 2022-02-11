@@ -203,11 +203,7 @@ namespace ft
             {
                 if (!_p.getRoot())
                     return ;
-                if (find(pos->first) != end())
-                {
-                    std::cout << "***** pos first *****" << pos->first << std::endl;
-                    _p.deleteNode(pos->first);
-                }
+                _p.deleteNode(pos->first);
             }
             void erase(iterator first, iterator last, typename ft::enable_if<!is_integral<iterator>::value>::type* = NULL)
             {
@@ -232,11 +228,7 @@ namespace ft
             {
                 if (!_p.getRoot())
                     return 0;
-                if (find(key) != end())
-                {
-                    erase(find(key));
-                    return 1;
-                }
+                _p.deleteNode(Leaf< Key, T >(key, T()));
                 return 0;
             }
             void swap(map& x)
@@ -259,31 +251,11 @@ namespace ft
             }
             iterator find(const Key& key)
             {
-                iterator it = begin();
-                iterator ite = end();
-
-                while (it != ite)
-                {
-                    if (it->first == key)
-                    {
-                        return iterator(it);
-                    }
-                    it++;
-                }
-                return iterator(it);
+                return iterator(_p.find(Leaf< Key, T >(key, T())));
             }	
             const_iterator find(const Key& key) const
             {
-                const_iterator it = begin();
-                const_iterator ite = end();
-
-                while (it != ite)
-                {
-                    if (it->first == key)
-                        return const_iterator(it);
-                    it++;
-                }
-                return const_iterator(it);
+                return const_iterator(_p.find(Leaf< Key, T >(key, T())));
             }
             pair< iterator,iterator > equal_range(const Key& key)
             {

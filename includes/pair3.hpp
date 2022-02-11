@@ -70,17 +70,18 @@ namespace ft
     {
         public:
         typedef Compare                                         key_compare;
-            class value_compare: public std::binary_function<pair<Key, T>,pair<Key, T>,bool> {
+        template< typename U >
+            class value_compare: public std::binary_function<U,U,bool> {
                 friend class RBTree;
                 protected:
                     Compare comp;
 
                 public:
                     typedef	bool result_type;
-                    typedef Key	first_argument_type;
-                    typedef T	second_argument_type;
+                    typedef U	first_argument_type;
+                    typedef U	second_argument_type;
                     value_compare	(Compare c): comp(c) {};
-                    bool	operator() (const pair<Key, T> &x, const pair< Key, T> &y) const
+                    bool	operator() (const U &x, const U &y) const
                     {
                         return comp(x.first, y.first);
                     }
@@ -108,7 +109,7 @@ namespace ft
             typedef Key key_type;
             typedef T mapped_type;
             key_compare _key_compare;
-            value_compare _value_compare;
+            value_compare< Leaf< Key, T > > _value_compare;
             pair< Key, T > _pair_type;
             Leaf< Key, T > *root;
             Leaf< Key, T > *last;
@@ -120,16 +121,16 @@ namespace ft
             RBTree(RBTree const & rhs) : _key_compare(rhs._key_compare), _value_compare(rhs._value_compare), root(NULL), last(NULL) {}
             RBTree & operator=(RBTree const & rhs) { _key_compare = rhs._key_compare; _value_compare = rhs._value_compare; root = NULL; last = NULL; return *this; }
             virtual ~RBTree() {}
-            NodePtr find(Leaf< Key, T> const & toFind)
+            NodePtr find(Leaf< Key, T> const & toFind) const
             {
                 NodePtr fromRoot = root;
                 while (fromRoot)
                 {
                     if (fromRoot == last)
                         return last;
-                    if (_value_compare(_pair_type.make_pair(toFind.first, toFind.second), _pair_type.make_pair(fromRoot->first, fromRoot->second)))
+                    if (_value_compare(toFind, *fromRoot))
                         fromRoot = fromRoot->left;
-                    else if (!_value_compare(_pair_type.make_pair(toFind.first, toFind.second), _pair_type.make_pair(fromRoot->first, fromRoot->second)) && toFind.first != fromRoot->first)
+                    else if (!_value_compare(toFind, *fromRoot) && toFind.first != fromRoot->first)
                         fromRoot = fromRoot->right;
                     else
                         return fromRoot;
@@ -290,9 +291,9 @@ namespace ft
                 while (fromRoot && fromRoot != last)
                 {
                     parentNode = fromRoot;
-                    if (_value_compare(_pair_type.make_pair(node->first, node->second), _pair_type.make_pair(fromRoot->first, fromRoot->second)))
+                    if (_value_compare(*node, *fromRoot))
                         fromRoot = fromRoot->left;
-                    else if (!_value_compare(_pair_type.make_pair(node->first, node->second), _pair_type.make_pair(fromRoot->first, fromRoot->second)) && node->first != fromRoot->first)
+                    else if (!_value_compare(*node, *fromRoot) && node->first != fromRoot->first)
                         fromRoot = fromRoot->right;
                     else
                         return ;
@@ -331,9 +332,9 @@ namespace ft
                     while (fromRoot && fromRoot != last)
                     {
                         parentNode = fromRoot;
-                        if (_value_compare(_pair_type.make_pair(node->first, node->second), _pair_type.make_pair(fromRoot->first, fromRoot->second)))
+                        if (_value_compare(*node, *fromRoot))
                             fromRoot = fromRoot->left;
-                        else if (!_value_compare(_pair_type.make_pair(node->first, node->second), _pair_type.make_pair(fromRoot->first, fromRoot->second)) && node->first != fromRoot->first)
+                        else if (!_value_compare(*node, *fromRoot) && node->first != fromRoot->first)
                             fromRoot = fromRoot->right;
                         else
                             return ;
@@ -344,11 +345,11 @@ namespace ft
                         }
                     }
                 node->parent = parentNode;
-                if (_value_compare(_pair_type.make_pair(node->first, node->second), _pair_type.make_pair(parentNode->first, parentNode->second)))
+                if (_value_compare(*node, *parentNode))
                 {
                     parentNode->left = node;
                 }
-                else if (!_value_compare(_pair_type.make_pair(node->first, node->second), _pair_type.make_pair(parentNode->first, parentNode->second)) && node->first != parentNode->first)
+                else if (!_value_compare(*node, *parentNode) && node->first != parentNode->first)
                 {
                     parentNode->right = node;
                 }
@@ -532,7 +533,7 @@ namespace ft
                     {
                         found = node;
                     }
-                    if (!_value_compare(_pair_type.make_pair(value, T()), _pair_type.make_pair(node->first, node->second)) && node->first != value)
+                    if (!_value_compare(Leaf< Key, T >(value, T()), *node) && node->first != value)
                     {
                         node = node->left;
                     }
@@ -563,7 +564,7 @@ namespace ft
                     }
                     return ;
                 }
-                if (_value_compare(_pair_type.make_pair(value, T()), _pair_type.make_pair(found->parent->first, found->parent->second)))
+                if (_value_compare(Leaf< Key, T >(value, T()), *found->parent))
                 {
                     while (found && found->left)
                     {
