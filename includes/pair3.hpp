@@ -107,35 +107,36 @@ namespace ft
             pair< Key, T > _pair_type;
             Leaf< Key, T > *root;
             Leaf< Key, T > *last;
+            Leaf< Key, T > *begin;
         public:
             typedef Leaf< Key, T >* NodePtr;
 
-            RBTree() : _key_compare(key_compare()), _value_compare(_key_compare), root(NULL), last(NULL) {}
-            RBTree(key_compare comp) : _key_compare(comp), _value_compare(_key_compare), root(NULL), last(NULL) {}
-            RBTree(RBTree const & rhs) : _key_compare(rhs._key_compare), _value_compare(rhs._value_compare), root(NULL), last(NULL) {}
-            RBTree & operator=(RBTree const & rhs) { _key_compare = rhs._key_compare; _value_compare = rhs._value_compare; root = NULL; last = NULL; return *this; }
+            RBTree() : _key_compare(key_compare()), _value_compare(_key_compare), root(NULL), last(NULL), begin(NULL) {}
+            RBTree(key_compare comp) : _key_compare(comp), _value_compare(_key_compare), root(NULL), last(NULL), begin(NULL) {}
+            RBTree(RBTree const & rhs) : _key_compare(rhs._key_compare), _value_compare(rhs._value_compare), root(NULL), last(NULL), begin(NULL) {}
+            RBTree & operator=(RBTree const & rhs) { _key_compare = rhs._key_compare; _value_compare = rhs._value_compare; root = NULL; last = NULL; begin = NULL; return *this; }
             virtual ~RBTree() {}
             void swap(RBTree< Key, T, Compare, alloc > *x, RBTree< Key, T, Compare, alloc > *y)
             {
-                RBTree< Key, T, Compare, alloc > *tmp;
-                NodePtr tmpRoot;
-                NodePtr tmpLast;
-                tmp = x;
-                x = y;
-                y = tmp;
-                tmpRoot = x->root;
-                tmpLast = x->last;
+                RBTree< Key, T, Compare, alloc >* tmp = y;
+                y = x;
+                x = tmp;
+                NodePtr tmpRoot = x->root;
+                NodePtr tmpLast = x->last;
+                NodePtr tmpBegin = x->begin;
                 x->root = root;
                 x->last = last;
+                x->begin = begin;
                 root = tmpRoot;
                 last = tmpLast;
+                begin = tmpBegin;
             }
             NodePtr find(Leaf< Key, T> const & toFind) const
             {
                 NodePtr fromRoot = root;
                 while (fromRoot)
                 {
-                    if (fromRoot == last)
+                    if (fromRoot == last || fromRoot == begin)
                         return last;
                     if (_value_compare(toFind, *fromRoot))
                         fromRoot = fromRoot->left;
@@ -149,7 +150,7 @@ namespace ft
             NodePtr findMinimum(NodePtr node) const
             {
                 NodePtr origin = node;
-                while (origin->left)
+                while (origin->left && origin->left != begin)
                     origin = origin->left;
                 return origin;
             }
@@ -286,6 +287,7 @@ namespace ft
                 NodePtr child = NULL;
                 int rotate = 0;
                 initializeNode(last);
+                initializeNode(begin);
                 if (root)
                 {
                     while (root->left && countNodesRight(findMaximum(root)) < countNodesLeft(findMinimum(root)))
@@ -297,7 +299,7 @@ namespace ft
                         leftRotate(root);
                     }
                 }
-                while (fromRoot && fromRoot != last)
+                while (fromRoot && fromRoot != last && fromRoot != begin)
                 {
                     parentNode = fromRoot;
                     if (_value_compare(*node, *fromRoot))
@@ -316,7 +318,9 @@ namespace ft
                 {
                     root = node;
                     root->right = last;
+                    root->left = begin;
                     last->parent = root;
+                    begin->parent = root;
                     node->color = 0;
                     return ;
                 }
@@ -338,7 +342,7 @@ namespace ft
                         rightRotate(parentNode->parent);
                     }
                     fromRoot = root;
-                    while (fromRoot && fromRoot != last)
+                    while (fromRoot && fromRoot != last && fromRoot != begin)
                     {
                         parentNode = fromRoot;
                         if (_value_compare(*node, *fromRoot))
@@ -365,6 +369,9 @@ namespace ft
                 NodePtr max = findMaximum(root);
                 max->right = last;
                 last->parent = max;
+                NodePtr min = findMinimum(root);
+                min->left = begin;
+                begin->parent = min;
                 if (node->parent)
                     recolor(root);
             }
@@ -376,9 +383,17 @@ namespace ft
             {
                 return last;
             }
+            NodePtr getBegin() const
+            {
+                return begin;
+            }
             void setLast(NodePtr node)
             {
                 last = node;
+            }
+            void setBegin(NodePtr node)
+            {
+                begin = node;
             }
             void recolor (NodePtr node)
             {
@@ -408,7 +423,7 @@ namespace ft
             }
             int isDeletable(NodePtr found)
             {
-                if (found->left && found->right && found->right != last && !found->left->left && !found->left->right && !found->right->left && (found->right->right == last || !found->right->right))
+                if (found->left && found->right && found->right != last && (!found->left->left || found->left->left == begin) && !found->left->right && !found->right->left && (found->right->right == last || !found->right->right))
                 {
                     if (found == found->parent->right)
                     {
@@ -422,6 +437,9 @@ namespace ft
                         NodePtr max = findMaximum(root);
                         max->right = last;
                         last->parent = max;
+                        NodePtr min = findMinimum(root);
+                        min->left = begin;
+                        begin->parent = min;
                     }
                     else
                     {
@@ -435,6 +453,9 @@ namespace ft
                         NodePtr max = findMaximum(root);
                         max->right = last;
                         last->parent = max;
+                        NodePtr min = findMinimum(root);
+                        min->left = begin;
+                        begin->parent = min;
                     }
                     return 1;
                 }
@@ -448,26 +469,31 @@ namespace ft
                     {
                         leftRotate(root);
                     }
-                    if (found == root && found->right == last && found->left)
+                    if (found == root && found->right == last && found->left && found->left != begin)
                     {
                         root = found->left;
                         found->left->parent = NULL;
                         initializeNode(found);
                         initializeNode(last);
+                        initializeNode(begin);
                         delete found;
                         found = NULL;
                         root->right = last;
                         last->parent = root;
+                        root->left = begin;
+                        begin->parent = root;
                         return 1;
                     }
-                    if (found == root && found->right == last && !found->left)
+                    if (found == root && found->right == last && (!found->left || found->left == begin))
                     {
                         initializeNode(found);
                         initializeNode(last);
                         initializeNode(root);
+                        initializeNode(begin);
                         delete found;
                         found = NULL;
                         last->parent = NULL;
+                        begin->parent = NULL;
                         root = NULL;
                         return 1;
                     }
@@ -478,7 +504,7 @@ namespace ft
             {
                 NodePtr found = NULL;
                 NodePtr node = getRoot();
-                while (node && node != last)
+                while (node && node != last && node != begin)
                 {
                     if (node->first == value)
                     {
@@ -499,7 +525,7 @@ namespace ft
                     return ;
                 if (found == found->parent->left)
                 {
-                    while (found->right && found->right != last && found->left)
+                    while (found->right && found->right != last && found->left && found->left != begin)
                     {
                         if (isRoot(found) || isDeletable(found))
                             return ;
@@ -508,13 +534,13 @@ namespace ft
                     if (isRoot(found) || isDeletable(found))
                             return ;
                     if (found == found->parent->right)
-                        found->parent->right = (found->left) ? found->left : found->right;
+                        found->parent->right = (found->left && found->left != begin) ? found->left : found->right;
                     else
-                        found->parent->left = (found->left) ? found->left : found->right;
+                        found->parent->left = (found->left && found->left != begin) ? found->left : found->right;
                 }
                 else
                 {
-                    while (found->right && found->right != last && found->left)
+                    while (found->right && found->right != last && found->left && found->left != begin)
                     {
                         if (isRoot(found) || isDeletable(found))
                             return ;
@@ -523,11 +549,11 @@ namespace ft
                     if (isRoot(found) || isDeletable(found))
                             return ;
                     if (found == found->parent->right)
-                        found->parent->right = (found->left) ? found->left : found->right;
+                        found->parent->right = (found->left && found->left != begin) ? found->left : found->right;
                     else
-                        found->parent->left = (found->left) ? found->left : found->right;
+                        found->parent->left = (found->left && found->left != begin) ? found->left : found->right;
                 }
-                if (found->left)
+                if (found->left && found->left != begin)
                     found->left->parent = found->parent;
                 if (found->right && found->right != last)
                     found->right->parent = found->parent;
@@ -537,6 +563,10 @@ namespace ft
                 NodePtr max = findMaximum(root);
                 max->right = last;
                 last->parent = max;
+                NodePtr min = findMinimum(root);
+                min->left = begin;
+                begin->parent = min;
+                
             }
             void printHelper(NodePtr root, std::string indent, bool last) const
             {

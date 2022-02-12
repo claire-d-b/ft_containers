@@ -210,9 +210,9 @@ int main( void )
         mapp.print();
         mapp.insert(mapp.begin()++, pair2);
         maps.print();
-        maps.insert(mapp.begin(), mapp.end());
+        maps.insert(mapp.rend(), mapp.rbegin());
         maps.print();
-        maps.erase(maps.begin(), maps.end());
+        maps.erase(maps.rend(), maps.rbegin());
         mapp.erase(3);
         mapp.erase(mapp.begin());
         mapp.print();

@@ -274,7 +274,7 @@ namespace ft
             }
             biReviter operator--(int)
             {
-                biReviter tmp = *this;
+                pointer tmp = _it;
                 
                 if (_it && _it->right)
                 {
@@ -288,7 +288,7 @@ namespace ft
                         _it = _it->parent;
                     _it = _it->parent;
                 }
-                return tmp;
+                return biReviter(tmp);
             }
             biReviter& operator++()
             {
@@ -297,7 +297,7 @@ namespace ft
             }
             biReviter operator++(int)
             {
-                biReviter tmp = *this;
+                pointer tmp = _it;
                 if (_it && _it->left)
                     {
                         _it = _it->left;
@@ -310,10 +310,10 @@ namespace ft
                         _it = _it->parent;
                     _it = _it->parent;
                 }
-                return tmp;
+                return biReviter(tmp);
             }
             pointer operator->() const {return &operator*();}
-            reference operator*() const {T tmp(_it); return *tmp;}
+            reference operator*() const { return *_it;}
             pointer base() const {return _it;}
 
             operator biReviter<biIter<const pointer> >()
