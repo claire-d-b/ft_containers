@@ -107,7 +107,12 @@ namespace ft
             }
             mapped_type& operator[](const Key& key)
             {
-                return (*((insert(pair< Key, T >(key ,mapped_type()))).first)).second;
+                if (find(key) == end())
+                {
+                    _n++;
+                    return (*((insert(pair< Key, T >(key ,mapped_type()))).first)).second;
+                }
+                return _p.find(Leaf< Key, T >(key ,mapped_type()))->second;
             }
             iterator begin()
             {
@@ -165,18 +170,16 @@ namespace ft
             }
             void clear()
             {
-                _p.freeNodes(_p.getRoot());
-                _n = 0;
+                erase(begin(), end());
             }
             pair<iterator, bool> insert(const value_type& value)
             {
                 iterator it;
-                int exists = 1;
+                bool exists = find(value.first) == end();
 				if ((it = iterator(_p.find(Leaf< Key, T >(value.first, value.second)))) == end())
                 {
-                    exists = 1;
-					_p.insert(Leaf< Key, T >(value.first, value.second));
                     _n++;
+					_p.insert(Leaf< Key, T >(value.first, value.second));
                 }
 				return pair<iterator, bool>(iterator(_p.find(Leaf< Key, T >(value.first, value.second))), exists);
             }
@@ -199,8 +202,8 @@ namespace ft
                     Leaf< Key, T > lf(first->first, first->second);
                     if (iterator(_p.find(lf)) == end())
                     {
-                        _p.insert(lf);
                         _n++;
+                        _p.insert(lf);
                     }
                     first++;
                 }
@@ -232,8 +235,8 @@ namespace ft
 						it++;
                     if (iterator(_p.find(*tmp)) != end())
                     {
-                        _p.deleteNode(tmp->first);
                         _n--;
+                        _p.deleteNode(tmp->first);
                     }
 					if (i != difference - 1)
 						it = iterator(_p.find(*it));
@@ -246,8 +249,8 @@ namespace ft
                 size_type exists = find(key) != end();
                 if (iterator(_p.find(Leaf< Key, T >(key, T()))) != end())
                 {
-                    _p.deleteNode(key);
                     _n--;
+                    _p.deleteNode(key);
                 }
                 return exists;
             }
