@@ -314,7 +314,7 @@ namespace ft
             }
             pointer operator->() const {return &operator*();}
             reference operator*() const { return *_it;}
-            pointer base() const {return _it;}
+            iterator_type base() const {return _it;}
 
             operator biReviter<biIter<const pointer> >()
             {
