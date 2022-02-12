@@ -22,15 +22,15 @@ namespace ft
         template<class U, class V>
         pair(const pair<U,V>& pr) : first(pr.first), second(pr.second) {}
         pair& operator=(const pair& pr) { first = pr.first; second = pr.second; return *this; }
-        pair<T1,T2> make_pair(T1 x, T2 y)
-        {
-            return pair<T1,T2>(x,y);
-        }
         /*operator pair<const T1, T2 >() const
         {
             return pair< const T1, T2 >(first, second);
         }*/
     };
+    template <typename _T1, typename _T2>
+	inline pair<_T1, _T2> make_pair(_T1 x, _T2 y)
+	{ return pair<_T1, _T2>(x, y); }
+
     template< class Key, class T >
     struct Leaf
     {

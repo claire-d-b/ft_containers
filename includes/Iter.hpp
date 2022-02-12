@@ -288,7 +288,7 @@ namespace ft
                         _it = _it->parent;
                     _it = _it->parent;
                 }
-                return biReviter(tmp);
+                return tmp;
             }
             biReviter& operator++()
             {
@@ -310,10 +310,10 @@ namespace ft
                         _it = _it->parent;
                     _it = _it->parent;
                 }
-                return biReviter(tmp);
+                return tmp;
             }
             pointer operator->() const {return &operator*();}
-            reference operator*() const { return *_it;}
+            reference operator*() const { iterator_type	base(_it); return *base; }
             iterator_type base() const {return _it;}
 
             operator biReviter<biIter<const pointer> >()

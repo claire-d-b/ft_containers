@@ -21,6 +21,7 @@ namespace ft
             size_t _n;
             T* _p;
             size_t _capacity;
+            Alloc _alloc;
         public:
             typedef size_t size_type;
             typedef T value_type;
@@ -34,26 +35,23 @@ namespace ft
             typedef iter< const_pointer > const_iterator;
             typedef reviter< const_iterator > const_reverse_iterator;
 
-            explicit vector (const allocator_type& alloc = allocator_type()) : _n(0), _p(0), _capacity(0)
+            explicit vector (const allocator_type& alloc = allocator_type()) : _n(0), _p(0), _capacity(0), _alloc(alloc)
             {
-                Alloc allocator = alloc;
-                _p = allocator.allocate(1);
+                _p = _alloc.allocate(1);
             }
-            explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _n(n), _p(0), _capacity(n)
+            explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _n(n), _p(0), _capacity(n), _alloc(alloc)
             {
-                Alloc allocator = alloc;
-                _p = allocator.allocate(_capacity);
+                _p = _alloc.allocate(_capacity);
                 for (size_type i = 0; i < _capacity; i++)
-                    allocator.construct(&_p[i], val);
+                    _alloc.construct(&_p[i], val);
             }
-            vector( const vector & x ) : _n(x._n), _p(0), _capacity(x._capacity)
+            vector( const vector & x ) : _n(x._n), _p(0), _capacity(x._capacity), _alloc(x._alloc)
             {
                 *this = x;
             }
             template <class InputIterator>
-            vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!is_integral<InputIterator>::value>::type* = NULL) : _n(0), _p(0), _capacity(0)
+            vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!is_integral<InputIterator>::value>::type* = NULL) : _n(0), _p(0), _capacity(0), _alloc(alloc)
             {
-                Alloc allocator = alloc;
                 size_type i = 0;
                 while (first != last)
                 {
@@ -62,14 +60,14 @@ namespace ft
                 }
                 _n = i;
                 _capacity = i;
-                _p = allocator.allocate(_capacity);
+                _p = _alloc.allocate(_capacity);
                 while (i)
                 {
                     first--;
                     i--;
                 }
                 while (i < _capacity)
-                    allocator.construct(&_p[i++], *first++);
+                    _alloc.construct(&_p[i++], *first++);
                 while (i)
                 {
                     first--;
@@ -79,22 +77,21 @@ namespace ft
             }
             vector & operator=( vector const & x )
             {
-                Alloc allocator;
                 _n = x._n;
                 _capacity = x._capacity;
-                _p = allocator.allocate(_capacity);
+                _alloc = x._alloc;
+                _p = _alloc.allocate(_capacity);
                 for (size_type i = 0; i < _capacity; i++)
-                    allocator.construct(&_p[i], x._p[i]);
+                    _alloc.construct(&_p[i], x._p[i]);
                 return *this;
             }
             virtual ~vector( void )
             {
                 if (_p)
                 {
-                    std::allocator< T > alloc;
                     for (size_type i = 0; i < _capacity; i++)
-                        alloc.destroy(&_p[i]);
-                    alloc.deallocate(_p, _capacity);
+                        _alloc.destroy(&_p[i]);
+                    _alloc.deallocate(_p, _capacity);
                     _capacity = 0;
                     _n = 0;
                     _p = 0;
@@ -421,7 +418,13 @@ namespace ft
     template< class T, class Alloc >
     bool operator==(const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
     {
-        return lhs.size() == rhs.size();
+        if (lhs.size() != rhs.size())
+			return FALSE;
+		else
+			for (typename vector<T,Alloc>::size_type i = 0; i < lhs.size(); i++)
+				if (lhs[i] != rhs[i])
+					return FALSE;
+		return TRUE;
     }
     template< class T, class Alloc >
     bool operator!=(const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs)
