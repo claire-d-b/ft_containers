@@ -15,21 +15,21 @@ namespace ft
     {
         typedef T1 first_type;
         typedef T2 second_type;
-        T1 first;
-        T2 second;
+        first_type first;
+        second_type second;
         pair() : first(first_type()), second(second_type()) {}
         pair( const T1& x, const T2& y ) : first(x), second(y) {}
         template<class U, class V>
-        pair (const pair<U,V>& pr) : first(pr.first), second(pr.second) {}
-        pair & operator=(pair const & rhs) { first = rhs.first; second = rhs.second; return *this; }
+        pair(const pair<U,V>& pr) : first(pr.first), second(pr.second) {}
+        pair& operator=(const pair& pr) { first = pr.first; second = pr.second; return *this; }
         pair<T1,T2> make_pair(T1 x, T2 y)
         {
             return pair<T1,T2>(x,y);
         }
-        operator pair<const T1, T2 >() const
+        /*operator pair<const T1, T2 >() const
         {
             return pair< const T1, T2 >(first, second);
-        }
+        }*/
     };
     template< class Key, class T >
     struct Leaf
@@ -99,12 +99,6 @@ namespace ft
                 node->right = NULL;
                 node->color = 0;
             }
-            void swap(Leaf< Key, T > **x, Leaf< Key, T > **y)
-            {
-                Leaf< Key, T > **tmp = x;
-                x = y;
-                y = tmp;
-            }
         protected:
             typedef Key key_type;
             typedef T mapped_type;
@@ -121,6 +115,21 @@ namespace ft
             RBTree(RBTree const & rhs) : _key_compare(rhs._key_compare), _value_compare(rhs._value_compare), root(NULL), last(NULL) {}
             RBTree & operator=(RBTree const & rhs) { _key_compare = rhs._key_compare; _value_compare = rhs._value_compare; root = NULL; last = NULL; return *this; }
             virtual ~RBTree() {}
+            void swap(RBTree< Key, T, Compare, alloc > *x, RBTree< Key, T, Compare, alloc > *y)
+            {
+                RBTree< Key, T, Compare, alloc > *tmp;
+                NodePtr tmpRoot;
+                NodePtr tmpLast;
+                tmp = x;
+                x = y;
+                y = tmp;
+                tmpRoot = x->root;
+                tmpLast = x->last;
+                x->root = root;
+                x->last = last;
+                root = tmpRoot;
+                last = tmpLast;
+            }
             NodePtr find(Leaf< Key, T> const & toFind) const
             {
                 NodePtr fromRoot = root;

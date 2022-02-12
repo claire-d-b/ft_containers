@@ -41,7 +41,7 @@ namespace ft
             typedef Key key_type;
             typedef T mapped_type;
             typedef Leaf< Key, T > leaf_type;
-            typedef Leaf< Key, T > const_leaf_type;
+            typedef const Leaf< Key, T > const_leaf_type;
             typedef pair< Key, T > value_type;
             typedef size_t size_type;
             typedef ptrdiff_t difference_type;
@@ -53,8 +53,8 @@ namespace ft
             typedef typename allocator_type::const_pointer const_pointer;
             typedef biIter< leaf_type* > iterator;
             typedef biIter< const_leaf_type* > const_iterator;
-            typedef biReviter< leaf_type* > reverse_iterator;
-            typedef biReviter< const_leaf_type* > const_reverse_iterator;
+            typedef biReviter< iterator > reverse_iterator;
+            typedef biReviter< const_iterator > const_reverse_iterator;
             explicit map(const Compare& comp = key_compare(), const Allocator& alloc = Allocator()) : _value_compare(comp), _key_compare(comp), _p(RBTree< Key, T, Compare, Allocator >(comp)), _n(0), _capacity(0), _alloc(alloc)
             {
                 Leaf< Key, T > *end = new Leaf< Key, T >(key_type(), mapped_type());
@@ -253,18 +253,13 @@ namespace ft
             }
             void swap(map& x)
             {
-                RBTree< Key, T, Compare, Allocator > tmpP = x._p;
-                size_t tmpC = x._capacity;
-                size_t tmpN = x._n;
+                size_type tmpN = x._n;
                 allocator_type tmpA = x._alloc;
-                x._p = this->_p;
-                x._capacity = this->_capacity;
-                x._n = this->_n;
+                x._n = _n;
                 x._alloc = _alloc;
-                this->_p = tmpP;
-                this->_capacity = tmpC;
-                this->_n = tmpN;
-                this->_alloc = tmpA;
+                _n = tmpN;
+                _alloc = tmpA;
+                _p.swap(&_p, &x._p);
             }
             size_type count(const Key& key) const
             {

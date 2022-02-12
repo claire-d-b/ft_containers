@@ -181,9 +181,9 @@ namespace ft
             biIter() : _it(T()) {}
             biIter(iterator_type x) : _it(x) {}
             template< class U >
-            biIter(U & other) : _it(&(*other)) {}
+            biIter(U const & other) : _it(&(*other)) {}
             template< class U >
-            biIter& operator=(U & other) {_it = &(*other); return *this;}
+            biIter& operator=(U const & other) {_it = &(*other); return *this;}
             virtual ~biIter() {}
             bool operator==(biIter const &rhs) const { return (_it == rhs._it);}
 		    bool operator!=(biIter const &rhs) const { return (!(_it == rhs._it));}
@@ -251,7 +251,7 @@ namespace ft
     class biReviter
     {
         private:
-            T _it;
+            typename iterator_traits<T>::pointer _it;
         public:
             typedef	typename iterator_traits<T>::difference_type		difference_type;
             typedef	typename iterator_traits<T>::value_type			value_type;
@@ -260,12 +260,10 @@ namespace ft
             typedef	typename iterator_traits<T>::iterator_category	iterator_category;
             typedef T iterator_type;
             typedef const T			const_iterator_type;
-            biReviter() : _it(T()) {}
-            biReviter(iterator_type x) : _it(x) {}
-            template< class U >
-            biReviter(U & other) : _it(other.base()) {}
-            template< class U >
-            biReviter& operator=(U & other) {_it = other.base(); return *this;}
+            biReviter() : _it(pointer()) {}
+            biReviter(pointer x) : _it(x) {}
+            biReviter(iterator_type const & other) : _it(other.base()) {}
+            biReviter& operator=(iterator_type const & other) {_it = other.base(); return *this;}
             virtual ~biReviter() {}
             bool operator==(biReviter const &rhs) const { return (_it == rhs._it);}
 		    bool operator!=(biReviter const &rhs) const { return (!(_it == rhs._it));}
@@ -276,7 +274,7 @@ namespace ft
             }
             biReviter operator--(int)
             {
-                 T tmp = _it;
+                biReviter tmp = *this;
                 
                 if (_it && _it->right)
                 {
@@ -299,7 +297,7 @@ namespace ft
             }
             biReviter operator++(int)
             {
-               T tmp = _it;
+                biReviter tmp = *this;
                 if (_it && _it->left)
                     {
                         _it = _it->left;
@@ -315,12 +313,12 @@ namespace ft
                 return tmp;
             }
             pointer operator->() const {return &operator*();}
-            reference operator*() const {T tmp(_it); return *--tmp;}
-            iterator_type base() const {return _it;}
+            reference operator*() const {T tmp(_it); return *tmp;}
+            pointer base() const {return _it;}
 
-            operator biReviter<biIter<const_iterator_type> >()
+            operator biReviter<biIter<const pointer> >()
             {
-                return (biReviter<biIter<const_iterator_type> >(biIter<const_iterator_type>(_it)));
+                return (biReviter<biIter<const pointer> >(biIter<const pointer>(_it)));
             }
     };
 

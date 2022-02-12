@@ -1,10 +1,10 @@
 .SUFFIXES:
 
 NAME	=	containers
-LIST	=	ite_n1 \
+LIST	=	rite_arrow \
 			
 HEADER	=	-I includes/
-CFLAGS	=	-Wall -Wextra -Werror -MMD -g3 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -MMD -g3 -fsanitize=address -std=c++98
 CC		=	clang++
 
 S_DIR	=	srcs/
