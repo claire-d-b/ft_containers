@@ -108,10 +108,7 @@ namespace ft
             mapped_type& operator[](const Key& key)
             {
                 if (find(key) == end())
-                {
-                    _n++;
                     return (*((insert(pair< Key, T >(key ,mapped_type()))).first)).second;
-                }
                 return _p.find(Leaf< Key, T >(key ,mapped_type()))->second;
             }
             iterator begin()
