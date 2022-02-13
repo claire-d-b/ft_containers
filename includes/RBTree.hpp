@@ -19,10 +19,6 @@ namespace ft
         template<class U, class V>
         pair(const pair<U,V>& pr) : first(pr.first), second(pr.second) {}
         pair& operator=(const pair& pr) { first = pr.first; second = pr.second; return *this; }
-        /*operator pair<const T1, T2 >() const
-        {
-            return pair< const T1, T2 >(first, second);
-        }*/
     };
     template <typename _T1, typename _T2>
 	inline pair<_T1, _T2> make_pair(_T1 x, _T2 y)
@@ -568,33 +564,33 @@ namespace ft
                 begin->parent = min;
                 
             }
-            void printHelper(NodePtr root, std::string indent, bool last) const
-            {
+            // void printHelper(NodePtr root, std::string indent, bool last) const
+            // {
                 // print the tree structure on the screen
-                if (root != NULL)
-                {
-                    std::cout<<indent;
-                    if (last)
-                    {
-                        std::cout<<"R----";
-                        indent += "     ";
-                    }
-                    else
-                    {
-                        std::cout<<"L----";
-                        indent += "|    ";
-                    }
-                    std::string sColor = root->color?"RED":"BLACK";
-                    std::cout<<root->first<<"("<<sColor<<")"<<std::endl;
-                    printHelper(root->left, indent, false);
-                    printHelper(root->right, indent, true);
-                }
-            }
-            void prettyPrint() const
-            {
-                if (root)
-                    printHelper(this->root, "", true);
-	        }
+            //     if (root != NULL)
+            //     {
+            //         std::cout<<indent;
+            //         if (last)
+            //         {
+            //             std::cout<<"R----";
+            //             indent += "     ";
+            //         }
+            //         else
+            //         {
+            //             std::cout<<"L----";
+            //             indent += "|    ";
+            //         }
+            //         std::string sColor = root->color?"RED":"BLACK";
+            //         std::cout<<root->first<<"("<<sColor<<")"<<std::endl;
+            //         printHelper(root->left, indent, false);
+            //         printHelper(root->right, indent, true);
+            //     }
+            // }
+            // void prettyPrint() const
+            // {
+            //     if (root)
+            //         printHelper(this->root, "", true);
+	        // }
             // If a node is red, both of its children are black. This means no two nodes on a path can be red nodes.
             // Every path from a root node to a NULL node has the same number of black nodes.
     };
