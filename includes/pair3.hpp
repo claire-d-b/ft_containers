@@ -277,7 +277,10 @@ namespace ft
             }
             void insert(Leaf< Key, T > const &toInsert)
             {
-                NodePtr node = new Leaf< Key, T >;
+                NodePtr node;
+                node = alloc().allocate(1);
+                alloc().construct(node, Leaf< Key, T >(key_type(), mapped_type()));
+                initializeNode(node);
                 node->second = toInsert.second;
                 node->first = toInsert.first;
                 node->color = 1; // new node must be red
@@ -432,8 +435,8 @@ namespace ft
                         found->parent->right->right = found->right;
                         found->right->parent = found->left;
                         initializeNode(found);
-                        delete found;
-                        found = NULL;
+                        alloc().destroy(found);
+                        alloc().deallocate(found, 1);
                         NodePtr max = findMaximum(root);
                         max->right = last;
                         last->parent = max;
@@ -448,8 +451,8 @@ namespace ft
                         found->parent->left->left = found->left;
                         found->left->parent = found->right;
                         initializeNode(found);
-                        delete found;
-                        found = NULL;
+                        alloc().destroy(found);
+                        alloc().deallocate(found, 1);
                         NodePtr max = findMaximum(root);
                         max->right = last;
                         last->parent = max;
@@ -476,8 +479,8 @@ namespace ft
                         initializeNode(found);
                         initializeNode(last);
                         initializeNode(begin);
-                        delete found;
-                        found = NULL;
+                        alloc().destroy(found);
+                        alloc().deallocate(found, 1);
                         root->right = last;
                         last->parent = root;
                         root->left = begin;
@@ -490,8 +493,8 @@ namespace ft
                         initializeNode(last);
                         initializeNode(root);
                         initializeNode(begin);
-                        delete found;
-                        found = NULL;
+                        alloc().destroy(found);
+                        alloc().deallocate(found, 1);
                         last->parent = NULL;
                         begin->parent = NULL;
                         root = NULL;
@@ -558,8 +561,8 @@ namespace ft
                 if (found->right && found->right != last)
                     found->right->parent = found->parent;
                 initializeNode(found);
-                delete found;
-                found = NULL;
+                alloc().destroy(found);
+                alloc().deallocate(found, 1);
                 NodePtr max = findMaximum(root);
                 max->right = last;
                 last->parent = max;
@@ -595,16 +598,6 @@ namespace ft
                 if (root)
                     printHelper(this->root, "", true);
 	        }
-            void freeNodes(NodePtr node)
-            {
-                if (node != NULL)
-                {
-                    freeNodes(node->left);
-                    freeNodes(node->right);
-                }
-                delete node;
-                node = NULL;
-            }
             // If a node is red, both of its children are black. This means no two nodes on a path can be red nodes.
             // Every path from a root node to a NULL node has the same number of black nodes.
     };

@@ -33,7 +33,7 @@ namespace ft
         private:
             value_compare _value_compare;
             Compare _key_compare;
-            RBTree<Key, T, Compare, Allocator > _p;
+            RBTree<Key, T, Compare> _p;
             size_t _n;
             size_t _capacity;
             Allocator _alloc;
@@ -55,34 +55,51 @@ namespace ft
             typedef biIter< const_leaf_type* > const_iterator;
             typedef biReviter< iterator > reverse_iterator;
             typedef biReviter< const_iterator > const_reverse_iterator;
-            explicit map(const Compare& comp = key_compare(), const Allocator& alloc = Allocator()) : _value_compare(comp), _key_compare(comp), _p(RBTree< Key, T, Compare, Allocator >(comp)), _n(0), _capacity(0), _alloc(alloc)
+            typedef std::allocator<ft::Leaf< Key, T > > _leaf_alloc;
+            explicit map(const Compare& comp = key_compare(), const Allocator& alloc = Allocator()) : _value_compare(comp), _key_compare(comp), _p(RBTree< Key, T, Compare >(comp)), _n(0), _capacity(0), _alloc(alloc)
             {
-                Leaf< Key, T > *end = new Leaf< Key, T >(key_type(), mapped_type());
+                Leaf< Key, T > *end;
+                Leaf< Key, T > *begin;
+                end = _leaf_alloc().allocate(1);
+                begin = _leaf_alloc().allocate(1);
+                _leaf_alloc().construct(end, Leaf< Key, T >(key_type(), mapped_type()));
+                _leaf_alloc().construct(begin, Leaf< Key, T >(key_type(), mapped_type()));
                 _p.setLast(end);
-                Leaf< Key, T > *begin = new Leaf< Key, T >(key_type(), mapped_type());
                 _p.setBegin(begin);
             }
             template< class InputIt >
-            map(InputIt first, InputIt last, const Compare& comp = key_compare(), const Allocator& alloc = Allocator(), typename ft::enable_if<!is_integral<InputIt>::value>::type* = NULL) : _value_compare(comp), _key_compare(comp), _p(RBTree< Key, T, Compare, Allocator >(comp)), _n(0), _capacity(0), _alloc(alloc)
+            map(InputIt first, InputIt last, const Compare& comp = key_compare(), const Allocator& alloc = Allocator(), typename ft::enable_if<!is_integral<InputIt>::value>::type* = NULL) : _value_compare(comp), _key_compare(comp), _p(RBTree< Key, T, Compare >(comp)), _n(0), _capacity(0), _alloc(alloc)
             {
-                Leaf< Key, T > *end = new Leaf< Key, T >(key_type(), mapped_type());
+                Leaf< Key, T > *end;
+                Leaf< Key, T > *begin;
+                end = _leaf_alloc().allocate(1);
+                begin = _leaf_alloc().allocate(1);
+                _leaf_alloc().construct(end, Leaf< Key, T >(key_type(), mapped_type()));
+                _leaf_alloc().construct(begin, Leaf< Key, T >(key_type(), mapped_type()));
                 _p.setLast(end);
-                Leaf< Key, T > *begin = new Leaf< Key, T >(key_type(), mapped_type());
                 _p.setBegin(begin);
                 insert(first, last);
             }
-            map(const map& other) : _value_compare(other._value_compare), _key_compare(other._key_compare), _p(RBTree< Key, T, Compare, Allocator >(other._key_compare)), _n(0), _capacity(0), _alloc(other._alloc)
+            map(const map& other) : _value_compare(other._value_compare), _key_compare(other._key_compare), _p(RBTree< Key, T, Compare >(other._key_compare)), _n(0), _capacity(0), _alloc(other._alloc)
             {
                 clear();
-                Leaf< Key, T > *end = new Leaf< Key, T >(key_type(), mapped_type());
+                Leaf< Key, T > *end;
+                Leaf< Key, T > *begin;
+                end = _leaf_alloc().allocate(1);
+                begin = _leaf_alloc().allocate(1);
+                _leaf_alloc().construct(end, Leaf< Key, T >(key_type(), mapped_type()));
+                _leaf_alloc().construct(begin, Leaf< Key, T >(key_type(), mapped_type()));
                 _p.setLast(end);
-                Leaf< Key, T > *begin = new Leaf< Key, T >(key_type(), mapped_type());
                 _p.setBegin(begin);
                 insert(other.begin(), other.end());
             }
-            ~map()
+            virtual ~map()
             {
-
+                clear();
+                _leaf_alloc().destroy(_p.getLast());
+                _leaf_alloc().deallocate(_p.getLast(), 1);
+                _leaf_alloc().destroy(_p.getBegin());
+                _leaf_alloc().deallocate(_p.getBegin(), 1);
             }
             map& operator=(const map& other)
             {
@@ -93,10 +110,14 @@ namespace ft
                 _capacity = 0;
                 _alloc = other._alloc;
 
-                _p = RBTree< Key, T, Compare, Allocator >(_key_compare);
-                Leaf< Key, T > *end = new Leaf< Key, T >(key_type(), mapped_type());
+                _p = RBTree< Key, T, Compare >(_key_compare);
+                Leaf< Key, T > *end;
+                Leaf< Key, T > *begin;
+                end = _leaf_alloc().allocate(1);
+                begin = _leaf_alloc().allocate(1);
+                _leaf_alloc().construct(end, Leaf< Key, T >(key_type(), mapped_type()));
+                _leaf_alloc().construct(begin, Leaf< Key, T >(key_type(), mapped_type()));
                 _p.setLast(end);
-                Leaf< Key, T > *begin = new Leaf< Key, T >(key_type(), mapped_type());
                 _p.setBegin(begin);
                 insert(other.begin(), other.end());
                 return *this;
@@ -142,22 +163,20 @@ namespace ft
             reverse_iterator rbegin()
             {
                 if (_p.getRoot())
-                    return reverse_iterator(iterator(_p.findMaximum(_p.getRoot())));
+                    return reverse_iterator(iterator(end()));
                 return (reverse_iterator(iterator(_p.getBegin())));
             }
             const_reverse_iterator rbegin() const
             {
-                if (_p.getRoot())
-                    return const_reverse_iterator(const_iterator(_p.findMaximum(_p.getRoot())));
-                return (const_reverse_iterator(const_iterator(_p.getBegin())));
+                return const_reverse_iterator(rbegin());
             }
             reverse_iterator rend()
             {
-                return reverse_iterator(iterator(_p.getBegin()));
+                return reverse_iterator(iterator(_p.findMinimum(_p.getRoot())));
             }
             const_reverse_iterator rend() const
             {
-                return const_reverse_iterator(const_iterator(_p.getBegin()));
+                return const_reverse_iterator(rend());
             }
             bool empty() const
             {

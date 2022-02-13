@@ -189,7 +189,24 @@ namespace ft
 		    bool operator!=(biIter const &rhs) const { return (!(_it == rhs._it));}
             biIter& operator++()
             {
-                (*this)++;
+                if (_it && _it->right)
+                {
+                    _it = _it->right;
+                    while (_it->left)
+                        _it = _it->left;
+                }
+                else if (_it)
+                {
+                    // std::cout << "++" << std::endl;
+                    while (_it->parent && _it == _it->parent->right)
+                    {
+                        // std::cout << "it parent right" << std::endl;
+                        _it = _it->parent;
+                    }
+                    // if (_it->parent)
+                    // std::cout << "it parent = " << _it->parent->first << std::endl;
+                    _it = _it->parent;
+                }
                 return *this;
             }
             biIter operator++(int)
@@ -218,7 +235,18 @@ namespace ft
             }
             biIter& operator--()
             {
-                (*this)--;
+                if (_it && _it->left)
+                    {
+                        _it = _it->left;
+                        while (_it->right)
+                            _it = _it->right;
+                    }
+                else if (_it)
+                {
+                    while (_it->parent && _it == _it->parent->left)
+                        _it = _it->parent;
+                    _it = _it->parent;
+                }
                 return *this;
             }
             biIter operator--(int)
@@ -247,128 +275,127 @@ namespace ft
                 return (biIter<const_iterator_type>(const_cast<const iterator_type>(_it)));
             }
     };
-    template< typename T >
+    template<typename Iterator>
     class biReviter
     {
-        private:
-            typename iterator_traits<T>::pointer _it;
         public:
-            typedef	typename iterator_traits<T>::difference_type		difference_type;
-            typedef	typename iterator_traits<T>::value_type			value_type;
-            typedef	typename iterator_traits<T>::pointer				pointer;
-            typedef	typename iterator_traits<T>::reference			reference;
-            typedef	typename iterator_traits<T>::iterator_category	iterator_category;
-            typedef T iterator_type;
-            typedef const T			const_iterator_type;
-            biReviter() : _it(pointer()) {}
-            biReviter(pointer x) : _it(x) {}
-            biReviter(iterator_type const & other) : _it(other.base()) {}
-            biReviter& operator=(iterator_type const & other) {_it = other.base(); return *this;}
-            virtual ~biReviter() {}
-            bool operator==(biReviter const &rhs) const { return (_it == rhs._it);}
-		    bool operator!=(biReviter const &rhs) const { return (!(_it == rhs._it));}
-            biReviter& operator--()
-            {
-                (*this)--;
-                return *this;
-            }
-            biReviter operator--(int)
-            {
-                pointer tmp = _it;
-                
-                if (_it && _it->right)
-                {
-                    _it = _it->right;
-                    while (_it->left)
-                        _it = _it->left;
-                }
-                else if (_it)
-                {
-                    while (_it->parent && _it == _it->parent->right)
-                        _it = _it->parent;
-                    _it = _it->parent;
-                }
-                return tmp;
-            }
-            biReviter& operator++()
-            {
-                (*this)++;
-                return *this;
-            }
-            biReviter operator++(int)
-            {
-                pointer tmp = _it;
-                if (_it && _it->left)
-                    {
-                        _it = _it->left;
-                        while (_it->right)
-                            _it = _it->right;
-                    }
-                else if (_it)
-                {
-                    while (_it->parent && _it == _it->parent->left)
-                        _it = _it->parent;
-                    _it = _it->parent;
-                }
-                return tmp;
-            }
-            pointer operator->() const {return &operator*();}
-            reference operator*() const { iterator_type	base(_it); return *base; }
-            iterator_type base() const {return _it;}
+            typedef Iterator                                                        iterator_type;
+            typedef typename ft::iterator_traits<iterator_type>::iterator_category	iterator_category;
+            typedef typename ft::iterator_traits<iterator_type>::value_type			value_type;
+            typedef typename ft::iterator_traits<iterator_type>::difference_type	difference_type;
+            typedef typename ft::iterator_traits<iterator_type>::pointer			pointer;
+            typedef typename ft::iterator_traits<iterator_type>::reference			reference;
+        private:
+            iterator_type															_it;
+            template<typename _Tp>
+            static _Tp* Get_Deference(_Tp *_x) { return _x; }
+            
+            template<typename _Tp>
+            static pointer Get_Deference(_Tp _x) { return _x.operator->(); }
+        public:
+            
+            biReviter() : _it() {};
+            explicit biReviter(iterator_type x) : _it(x) {};
+            biReviter(const biReviter & x) : _it(x.base()) {};
 
-            operator biReviter<biIter<const pointer> >()
-            {
-                return (biReviter<biIter<const pointer> >(biIter<const pointer>(_it)));
-            }
-    };
+            template<typename Iter>
+            biReviter(const biReviter<Iter> & x) : _it(x.base()) {}
 
-    template< class Iter>
-    biIter<Iter> operator+( typename biIter<Iter>::difference_type n, const biIter<Iter>& it )
-    {
-        return biIter<Iter>(it.base() + n);
-    }
-    template< class Iterator, class U >
-    typename biIter<Iterator>::difference_type operator-( const biIter<Iterator>& lhs, const biIter<U>& rhs )
-    {
-        return lhs.base() - rhs.base();
-    }
+            virtual ~biReviter() {};
+            
 
-    template< class Iter >
-    biReviter<Iter> operator+( typename biReviter<Iter>::difference_type n, const biReviter<Iter>& it )
-    {
-        return biReviter<Iter>(it.base() - n);
-    }
-    template< class Iterator, class U >
-    typename biReviter<Iterator>::difference_type operator-( const biReviter<Iterator>& lhs, const biReviter<U>& rhs )
-    {
-        return rhs.base() - lhs.base();
-    }
+            iterator_type base() const { return _it; };
+            
+            
+            biReviter operator+(difference_type n) const { return biReviter(_it - n); }
+            biReviter operator++() { --_it; return (*this); }
+            biReviter operator++(int) { biReviter tmp = *this; --_it; return tmp; }
+            biReviter & operator+=(difference_type n) { _it -= n; return *this; }
+            
 
-    template<typename Iterator1, typename Iterator2>
-	bool			operator==(biIter<Iterator1> const &lhs, biIter<Iterator2> const &rhs) { return (lhs.base() == rhs.base()); }
-    template<typename Iterator1, typename Iterator2>
-    bool operator!=(biIter<Iterator1> const &lhs, biIter<Iterator2> const &rhs) {return (lhs.base() != rhs.base());}
-    template<typename Iterator1, typename Iterator2>
-    bool operator>(biIter<Iterator1> const &lhs, biIter<Iterator2> const &rhs) {return (lhs.base() > rhs.base());}
-    template<typename Iterator1, typename Iterator2>
-    bool operator>=(biIter<Iterator1> const &lhs, biIter<Iterator2> const &rhs) {return (lhs.base() >= rhs.base());}
-    template<typename Iterator1, typename Iterator2>
-    bool operator<(biIter<Iterator1> const &lhs, biIter<Iterator2> const &rhs) {return (lhs.base() < rhs.base());}
-    template<typename Iterator1, typename Iterator2>
-    bool operator<=(biIter<Iterator1> const &lhs, biIter<Iterator2> const &rhs) {return (lhs.base() <= rhs.base());}
+            
+            biReviter operator-(difference_type n) const { return biReviter(_it + n); }
+            biReviter & operator--() { ++_it; return (*this); }
+            biReviter operator--(int) { biReviter tmp = (*this); ++_it; return tmp; }
+            biReviter & operator-=(difference_type n) { _it += n; return *this; }
+            
 
-    template<typename Iterator1, typename Iterator2>
-	bool			operator==(biReviter<Iterator1> const &lhs, biReviter<Iterator2> const &rhs) { return (lhs.base() == rhs.base()); }
-    template<typename Iterator1, typename Iterator2>
-    bool operator!=(biReviter<Iterator1> const &lhs, biReviter<Iterator2> const &rhs) {return (lhs.base() != rhs.base());}
-    template<typename Iterator1, typename Iterator2>
-    bool operator>(biReviter<Iterator1> const &lhs, biReviter<Iterator2> const &rhs) {return (lhs.base() < rhs.base());}
-    template<typename Iterator1, typename Iterator2>
-    bool operator>=(biReviter<Iterator1> const &lhs, biReviter<Iterator2> const &rhs) {return (lhs.base() <= rhs.base());}
-    template<typename Iterator1, typename Iterator2>
-    bool operator<(biReviter<Iterator1> const &lhs, biReviter<Iterator2> const &rhs) {return (lhs.base() > rhs.base());}
-    template<typename Iterator1, typename Iterator2>
-    bool operator<=(biReviter<Iterator1> const &lhs, biReviter<Iterator2> const &rhs) {return (lhs.base() >= rhs.base());}
+            
+            reference operator*() const { Iterator tmp = _it; return (*--tmp); }
+            pointer operator->() const { Iterator tmp = _it; --tmp; return Get_Deference(tmp); }
+            reference operator[](difference_type n) const { return *(*this + n); }
+            
+        };
+
+        /**
+        * 	Non-member function overloads
+        */
+        
+            
+            template<typename Iterator>
+            inline bool operator==(const biReviter<Iterator> & lhs, const biReviter<Iterator> & rhs)
+            { return lhs.base() == rhs.base(); }
+
+            template<typename Iterator>
+            inline bool operator!=(const biReviter<Iterator> & lhs, const biReviter<Iterator> & rhs)
+            { return !(lhs == rhs); }
+
+            template<typename Iterator>
+            inline bool operator<(const biReviter<Iterator> & lhs, const biReviter<Iterator> & rhs)
+            { return rhs.base() < lhs.base(); }
+
+            template<typename Iterator>
+            inline bool operator<=(const biReviter<Iterator> & lhs, const biReviter<Iterator> & rhs)
+            { return !(rhs < lhs); }
+
+            template<typename Iterator>
+            inline bool operator>(const biReviter<Iterator> & lhs, const biReviter<Iterator> & rhs)
+            { return rhs < lhs; }
+
+            template<typename Iterator>
+            inline bool operator>=(const biReviter<Iterator> & lhs, const biReviter<Iterator> & rhs)
+            { return !(lhs < rhs); }
+            
+            
+            template<typename IteratorLeft, typename IteratorRight>
+            inline bool operator==(const biReviter<IteratorLeft> & lhs, const biReviter<IteratorRight> & rhs)
+            { return lhs.base() == rhs.base(); }
+
+            template<typename IteratorLeft, typename IteratorRight>
+            inline bool operator<(const biReviter<IteratorLeft> & lhs, const biReviter<IteratorRight> & rhs)
+            { return lhs.base() > rhs.base(); }
+
+            template<typename IteratorLeft, typename IteratorRight>
+            inline bool operator!=(const biReviter<IteratorLeft> & lhs, const biReviter<IteratorRight> & rhs)
+            { return lhs.base() != rhs.base(); }
+
+            template<typename IteratorLeft, typename IteratorRight>
+            inline bool operator>(const biReviter<IteratorLeft> & lhs, const biReviter<IteratorRight> & rhs)
+            { return lhs.base() < rhs.base(); }
+
+            template<typename IteratorLeft, typename IteratorRight>
+            inline bool operator<=(const biReviter<IteratorLeft> & lhs, const biReviter<IteratorRight> & rhs)
+            { return lhs.base() >= rhs.base(); }
+
+            template<typename IteratorLeft, typename IteratorRight>
+            inline bool operator>=(const biReviter<IteratorLeft> & lhs, const biReviter<IteratorRight> & rhs)
+            { return lhs.base() <= rhs.base(); }
+            
+        
+
+        
+        template<typename Iterator>
+        inline typename biReviter<Iterator>::difference_type operator-(const biReviter<Iterator>& lhs, const biReviter<Iterator>& rhs)
+        { return rhs.base() - lhs.base(); }
+
+        template<typename IteratorLeft, typename IteratorRight>
+        inline typename biReviter<IteratorLeft>::difference_type operator-(const biReviter<IteratorLeft>& lhs, const biReviter<IteratorRight>& rhs)
+        { return rhs.base() - lhs.base(); }
+
+        template<typename Iterator>
+        inline biReviter<Iterator> operator+(typename biReviter<Iterator>::difference_type diff, const biReviter<Iterator>& lhs)
+        { return biReviter<Iterator>(lhs.base() - diff); }
+        
 }
 
 #endif
