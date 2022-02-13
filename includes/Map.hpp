@@ -110,6 +110,10 @@ namespace ft
                 _capacity = 0;
                 _alloc = other._alloc;
 
+                _leaf_alloc().destroy(_p.getLast());
+                _leaf_alloc().deallocate(_p.getLast(), 1);
+                _leaf_alloc().destroy(_p.getBegin());
+                _leaf_alloc().deallocate(_p.getBegin(), 1);
                 _p = RBTree< Key, T, Compare >(_key_compare);
                 Leaf< Key, T > *end;
                 Leaf< Key, T > *begin;
@@ -172,7 +176,9 @@ namespace ft
             }
             reverse_iterator rend()
             {
-                return reverse_iterator(iterator(_p.findMinimum(_p.getRoot())));
+                if (_p.getRoot())
+                    return reverse_iterator(iterator(_p.findMinimum(_p.getRoot())));
+                return (reverse_iterator(_p.getBegin()));
             }
             const_reverse_iterator rend() const
             {
@@ -358,11 +364,6 @@ namespace ft
                 }
                 return it;
             }
-            void print()
-            {
-                _p.prettyPrint();
-            }
-        //template < class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::RBTree<const Key, T> > >
     };
 
     template< class Key, class T, class Compare, class Alloc >

@@ -35,10 +35,7 @@ namespace ft
             typedef iter< const_pointer > const_iterator;
             typedef reviter< const_iterator > const_reverse_iterator;
 
-            explicit vector (const allocator_type& alloc = allocator_type()) : _n(0), _p(0), _capacity(0), _alloc(alloc)
-            {
-                _p = _alloc.allocate(1);
-            }
+            explicit vector (const allocator_type& alloc = allocator_type()) : _n(0), _p(0), _capacity(0), _alloc(alloc) {}
             explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _n(n), _p(0), _capacity(n), _alloc(alloc)
             {
                 _p = _alloc.allocate(_capacity);
@@ -73,7 +70,6 @@ namespace ft
                     first--;
                     i--;
                 }
-                //assign(first, last);
             }
             vector & operator=( vector const & x )
             {
@@ -87,15 +83,12 @@ namespace ft
             }
             virtual ~vector( void )
             {
-                if (_p)
-                {
-                    for (size_type i = 0; i < _capacity; i++)
-                        _alloc.destroy(&_p[i]);
-                    _alloc.deallocate(_p, _capacity);
-                    _capacity = 0;
-                    _n = 0;
-                    _p = 0;
-                }
+                for (size_type i = 0; i < _capacity; i++)
+                    _alloc.destroy(&_p[i]);
+                _alloc.deallocate(_p, _capacity);
+                _capacity = 0;
+                _n = 0;
+                _p = 0;
             }
             iterator begin()
             {
@@ -206,25 +199,22 @@ namespace ft
                 {
                     resize(n);
                     _n = len;
-                    //ft::vector< T > newV(n);
-                    //this->~vector();
-                    //*this = newV;
-                    //newV.~vector();
                 }
             }
             void resize (size_type n, value_type val = value_type())
             {
-                ft::vector< T > tmp2(n);
+                ft::vector< T > tmp(n);
                 unsigned long i = 0;
                 while (i < n && i < size())
                 {
-                    tmp2._p[i] = _p[i];
+                    tmp._p[i] = _p[i];
                     i++;
                 }
                 while (i < n)
-                    tmp2._p[i++] = val;
-                *this = tmp2;
-                tmp2.~vector();
+                    tmp._p[i++] = val;
+                this->~vector();
+                *this = tmp;
+                tmp.~vector();
             }
             void push_back (const value_type& val)
             {
@@ -242,7 +232,7 @@ namespace ft
             }
             size_type max_size() const
             {
-                return (std::pow(2, 32) / sizeof(T) * std::pow(2, 32)) - 1;
+                return _alloc.max_size();
             }
             template <class InputIterator>
             void assign(InputIterator first, InputIterator last, typename ft::enable_if<!is_integral<InputIterator>::value>::type* = NULL)
@@ -283,10 +273,10 @@ namespace ft
                     res._p[x++] = val;
                 while (i < len)
                     res._p[x++] = copy._p[i++];
-                //this->~vector();
+                this->~vector();
                 *this = res;
-                //copy.~vector();
-                //res.~vector();
+                copy.~vector();
+                res.~vector();
             }
             template <class InputIterator>
             void insert(iterator pos, InputIterator first, InputIterator last, typename ft::enable_if<!is_integral<InputIterator>::value>::type* = NULL)
@@ -317,10 +307,10 @@ namespace ft
                     res._p[x++] = *(first++);
                 while (i < len)
                     res._p[x++] = copy._p[i++];
-                //this->~vector();
+                this->~vector();
                 *this = res;
-                //copy.~vector();
-                //res.~vector();
+                copy.~vector();
+                res.~vector();
             }
             iterator insert (iterator position, const value_type& val)
             {
@@ -341,10 +331,10 @@ namespace ft
                 res._p[x++] = val;
                 while (i < len)
                     res._p[x++] = copy._p[i++];
-                //this->~vector();
+                this->~vector();
                 *this = res;
-                //copy.~vector();
-                //res.~vector();
+                copy.~vector();
+                res.~vector();
                 return begin() + pos;
             }
             iterator erase(iterator position)
@@ -410,9 +400,10 @@ namespace ft
             }
             void clear()
             {
-                //this->~vector();
                 vector< T > tmp;
+                this->~vector();
                 *this = tmp;
+                tmp.~vector();
             }
     };
     template< class T, class Alloc >

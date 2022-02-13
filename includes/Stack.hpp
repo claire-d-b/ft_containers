@@ -29,16 +29,6 @@ namespace ft
             friend bool ft::operator>=(const stack<T,Container>& lhs, const stack<T,Container>& rhs);
 
             explicit stack(const Container& cont = Container()) : _n(0), _capacity(0), _p(0), _c(cont) {}
-            stack(const stack& other) : _n(other._n), _capacity(other._capacity), _p(0), _c(other._c) {}
-            stack& operator=(const stack& other)
-            {
-                _n = other._n;
-                _capacity = other._capacity;
-                _p = 0;
-                _c = other._c;
-                return *this;
-            }
-            virtual ~stack() {}
             size_type size() const
             {
                 return _c.size();
