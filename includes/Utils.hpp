@@ -3,7 +3,6 @@
 
 namespace ft
 {
-    // template< typename T, class It = iter< T > >
     template <typename T, T val>
 	struct storage
 	{
